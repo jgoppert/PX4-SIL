@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uorb>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="actuator_armed">
+        <description>Controls if actuator output is live.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="armed" type="bool">Set to true if system is armed.</field>
+        <field name="ready_to_arm" type="bool">Set to true if system is ready to be armed.</field>
+        <field name="lockdown" type="bool">Set to true if actuators are forcibly disabled (due to emergency or HIL).</field>
+        <field name="force_failsafe" type="bool">Set to true if actuators are forced to the failsafe position.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="actuator_controls">
+            <description>Values publicshed to these topics are
+    the outputs of the vehicle control system, and are expected to be mixed
+    and used to drive the actuators (serovs, speed controllers, etc.) that
+    operate the vehicle.
+
+    Each topic can be published by a single controller.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="control" type="float[8]">The control values in natural units.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="actuator_outputs">
+        <description>Actuator output values.
+    Values published to these topics are the outputs of the control mixing system as 
+    sent to the actuators (servos, motors, etc.) that operate the vehicle.
+
+    Each topic can be published by a single output driver.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="output" type="float">Output data in natural output units.</field>
+        <field name="noutputs" type="unsigned">Number of valid outputs.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="airspeed">
+        <description>Definition of airspeed topic.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="indicated_airspeed_m_s" type="float">Indicated airspeed in meters per second, -1 if unknown.</field>
+        <field name="air_temperature_celsius" type="float">Air temperature in degrees celsius, -1000 if unknown.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="battery_status">
+        <description>Battery voltages and status.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="voltage_v" type="float">Battery voltage in volts, 0 if unknown.</field>
+        <field name="voltage_filtered_v" type="float">Battery voltage filtered in volts, 0 if unknown.</field>
+        <field name="current_a" type="float">Battery current in amperes, -1 if unknown.</field>
+        <field name="discharged_mah" type="float">Discharged amount in mAh.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="debug_key_value">
+            <description>Actual data, this is specific to the type of data which is stored in
+    this struct line containing L0GME will be added by the Python logging
+    code generator to the logged dataset.</description>
+        <field name="timestamp_ms" type="uint32_t">Milliseconds since system boot.</field>
+        <field name="key" type="char[10]"> max 10 charasters as key.</field>
+        <field name="value" type="float">The value to send as debug output.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="differential_pressure">
+        <description>Differential pressure packet.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot, needed to integrate.</field>
+        <field name="error_count" type="uint64_t">Number of errors detected by driver.</field>
+        <field name="differential_pressure_raw_pa" type="float"> Raw differential pressure reading (may be negative).</field>
+        <field name="differential_pressure_filtered_pa" type="float"> Low pass filtered differential pressure reading (may be negative).</field>
+        <field name="max_differential_pressure_pa" type="float">The value to send as debug output.</field>
+        <field name="temperature" type="float">Temperature provided by sensor, celsius, -1000.0f if unknown.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="encoders">
+        <description>Encoders topic.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="counts" type="int64_t[4]">Counts of encoder.</field>
+        <field name="velocity" type="float[]">Counts of encoder/second.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="esc_status">
+        <description>Electronic speed controller status.</description>
+        <field name="counter" type="uint16_t">Incremented by writing thread everytime new data stored.</field>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="esc_count" type="uint8_t">Number of connected ESCs.</field>
+        <!-- TODO: add esc structure -->
+        <field name="esc" type="esc[8]">ESC data structure.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="estimator_status">
+        <description>Estimator status report. This is a generic report 
+    struct which allows any of the onboard estimators to wrie the interal
+    state to the system log.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="states" type="float[32]">Internal filter states.</field>
+        <field name="n_states" type="int8_t">Number of filter states used.</field>
+        <field name="nan_flags" type="uint8_t">Bitmask to indicate NaN states.</field>
+        <field name="health_flags" type="uint8_t">Bitmask to indicate sensor health (vel, pos, hgt).</field>
+        <field name="timeout_flags" type="uint8_t">Bitmask to indicate timeout (vel, pos, hgt).</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="fence">
+        <description>List of fence vertices.</description>
+        <field name="count" type="uint16_t">Number of actual vertices.</field>
+        <field name="vertices" type="fence_vertex[16]">Fence vertices.</field>
+    </topic>
+
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="filtered_bottom_flow">
+        <description>Filtered bottom optical flow in bodyframe.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="sumx" type="float">Integrated bodyframe x flow in meteres.</field>
+        <field name="sumy" type="float">Integrated bodyframe x flow in meteres.</field>
+        <field name="vx" type="float">Flow bodyframe x speed m/s.</field>
+        <field name="vy" type="float">Flow bodyframe y speed m/s.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="home_position">
+        <description>GPS home position in WGS84 coordinates.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="lat" type="double">Latitude in degrees.</field>
+        <field name="lon" type="double">Longitude in degrees.</field>
+        <field name="alt" type="float">Altitude in meteres.</field>
+        <field name="x" type="float">x coordinate in meters.</field>
+        <field name="y" type="float">y coordinate in meters.</field>
+        <field name="z" type="float">z coordinate in meters.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="manual_control_setpoint">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="mission">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="mission_result">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="navigation_capabilities">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="offboard_control_setpoint">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="omnidirectional_flow">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="optical_flow">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="parameter_update">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="positional_setpoint_triplet">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="rc_channels">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="safety">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="satellite_info">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="sensor_combined">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="servorail_status">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="subsystem_info">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="system_power">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="tecs_status">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="telemetry_status">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_attitude">
+        <description>Attitude in NED body frame in SI units. This is similar to mavlink message ATTITUDE but for onboard use.
+    @see http://en.wikipedia.org/wiki/International_System_of_Units</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="roll" type="float">Roll angle (rad, Tait-Bryan, NED)</field>
+        <field name="pitch" type="float">Pitch angle (rad, Tait-Bryan, NED)</field>
+        <field name="yaw" type="float">Yaw angle (rad, Tait-Bryan, NED)</field>
+        <field name="rollspeed" type="float">Roll anglular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="pitchspeed" type="float">Pitch angular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="yawspeed" type="float">Yaw angular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="rollacc" type="float">Roll anglular acceleration (rad/s^2, Tait-Bryan, NED)</field>
+        <field name="pitchacc" type="float">Pitch angular acceleration (rad/s^2, Tait-Bryan, NED)</field>
+        <field name="yawacc" type="float">Yaw angular acceleration (rad/s^2, Tait-Bryan, NED)</field>
+        <field name="rate_offsets" type="float[3]">Offsets of the body angular rates from zero</field>
+        <field name="R" type="float[3][3]">Rotation matrix body to NED</field>
+        <field name="q" type="float[3][3]">Quaternion body to NED</field>
+        <field name="g_comp" type="float[3]">Compensated gravity vector</field>
+        <field name="R_valid" type="bool">Rotation matrix valid</field>
+        <field name="q_valid" type="bool">Quaternion valid</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_attitude_setpoint">
+        <description>Vehicle attitude setpoint.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="roll_body" type="float">Roll angle (rad, Tait-Bryan, NED)</field>
+        <field name="pitch_body" type="float">Pitch angle (rad, Tait-Bryan, NED)</field>
+        <field name="yaw_body" type="float">Yaw angle (rad, Tait-Bryan, NED)</field>
+        <field name="R_body" type="float[3][3]">Rotation matrix of setpoint, body to NED</field>
+        <field name="R_valid" type="bool">Set to true if R_body is valid</field>
+        <field name="q_d" type="float[4]">Desired quaternion for quaternion control</field>
+        <field name="q_d_valid" type="bool">Set to true if q_d is valid</field>
+        <field name="q_e" type="float[4]">Attitude error quaternion</field>
+        <field name="q_e_valid" type="bool">Set to true if q_e is valid</field>
+        <field name="thrust" type="float">Thrust in Newton the power system should generate</field>
+        <!-- TODO Not clear what the reset fields do -->
+        <field name="roll_reset_integral" type="bool">Reset roll integrator (navigation logic change)</field>
+        <field name="pitch_reset_integral" type="bool">Reset pitch integrator (navigation logic change)</field>
+        <field name="yaw_reset_integral" type="bool">Reset yaw integrator (navigation logic change)</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_bodyframe_speed_setpoint">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_command">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_control_mode">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_force_setpoint">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_global_position">
+        <description>The estimated vehicle global position.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="time_gps_usec" type="uint64_t">GPS timestamp in microseconds.</field>
+        <field name="lat" type="double">Latitude in degrees.</field>
+        <field name="lon" type="double">Longitude in degrees.</field>
+        <field name="alt" type="double">Altitude AMSL in meters.</field>
+        <field name="vel_n" type="float">Ground north velocity m/s.</field>
+        <field name="vel_e" type="float">Ground east velocity m/s.</field>
+        <field name="vel_d" type="float">Ground down velocity m/s.</field>
+        <field name="yaw" type="float">Yaw in radians -PI..+PI.</field>
+        <field name="eph" type="float">Standard devation of position estimate horizontally.</field>
+        <field name="epv" type="float">Standard devation of position estimate vertically.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_global_velocity_setpoint">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_gps_position">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_local_position">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_local_position_setpoint">
+        <description>Local position in NED frame.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="x" type="float">position in x direction, meters, NED.</field>
+        <field name="y" type="float">position in y direction, meters, NED.</field>
+        <field name="z" type="float">position in z direction, meters, NED.</field>
+        <field name="yaw" type="float">heading in radians -PI..+PI.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_rates_setpoint">
+        <description>The vehilce rates setpoint.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="roll" type="float">Roll anglular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="pitch" type="float">Pitch angular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="yaw" type="float">Yaw angular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="thrust" type="float">Thrust normalized to 0..1</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_status">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_vicon_position">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="vehicle_vicon_estimate">
+        <description></description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="wind_estimate">
+        <description>Wind estimate topic.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="windspeed_north" type="float">Wind component in north/ X direction.</field>
+        <field name="windspeed_east" type="float">Wind component in east/ Y direction.</field>
+        <field name="covariance_north" type="float">Uncertainty in north/ X direction. Set to zero (no uncertainty) if not estimated.</field>
+        <field name="covariance_east" type="float">Uncertainty in east/ Y direction. Set to zero (no uncertainty) if not estimated.</field>
+    </topic>
+
+</uorb>
+<!-- vi: ts=4:sw=4:set expandtab:set nowrap: -->
