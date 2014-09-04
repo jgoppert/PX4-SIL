@@ -38,7 +38,7 @@ class SympyDict(dict):
         return cls(d)
 
 
-def state_space_lambdify(f_vect, x_vect, u_vect, *args):
+def state_space_lambdify(f_vect, t, x_vect, u_vect, *args):
     """
     Given a state space description of a dynamic system, create
     a lambda funtion to simulate it with.
@@ -47,6 +47,7 @@ def state_space_lambdify(f_vect, x_vect, u_vect, *args):
         f_vect : sympy matrix of expressions for
             the derivative of x (continuous),
             or for the change in x (discrete)
+        t : the indenpendent time-like variable
         x_vect : sympy matrix of symbols in x vector
         u_vect : sympy matrix of symbols in u vector
         *args: other parameters that are not states or inputs
@@ -55,4 +56,4 @@ def state_space_lambdify(f_vect, x_vect, u_vect, *args):
     u = sympy.DeferredVector('u')
     ss_subs = {x_vect[i]: x[i] for i in range(len(x_vect))}
     ss_subs.update({u_vect[i]: u[i] for i in range(len(u_vect))})
-    return sympy.lambdify((x, u) + args, f_vect.subs(ss_subs))
+    return sympy.lambdify((t, x, u) + args, f_vect.subs(ss_subs))

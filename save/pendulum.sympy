@@ -6,5 +6,6 @@
  'm': "Symbol('m')",
  'l': "Symbol('l')",
  'u_vect': "MutableDenseMatrix([[Function('tau')(Symbol('t'))]])",
+ 't': "Symbol('t')",
  'x_vect': "MutableDenseMatrix([[Function('theta')(Symbol('t'))], [Derivative(Function('theta')(Symbol('t')), Symbol('t'))]])",
  'theta': "Function('theta')"}
