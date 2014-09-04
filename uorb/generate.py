@@ -8,9 +8,6 @@ uorb_file_header = '''# Do not edit!
 # edit uorb/uorb.xml
 
 generation_timestamp = '{timestamp:s}'
-
-import numpy as np
-
 '''
 
 topic_class_template = '''

@@ -2,10 +2,7 @@
 # automatically generated using uorb/generate.py
 # edit uorb/uorb.xml
 
-generation_timestamp = '2014-09-03 23:24:41'
-
-import numpy as np
-
+generation_timestamp = '2014-09-04 09:38:18'
 
 
 class Topic_actuator_armed(object):

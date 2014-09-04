@@ -17,6 +17,7 @@ def nested_dict_to_namedtuple(d):
     d = dict_to_namedtuple('d', d)
     return d
 
+
 class PeriodicProcess(object):
 
     def __init__(self, period):
@@ -127,15 +128,15 @@ class Logger(PeriodicProcess):
         self.count = 0
 
     def run(self, t):
-        count = self.count + 1
-        if count > self.n_t:
+        if self.count >= self.n_t - 1:
             return
+        else:
+            self.count = self.count + 1
         for topic in self.subs.keys():
             self.subs[topic].update()
             d = self.subs[topic].data.__dict__
             for field in d.keys():
-                self.log[topic][field][count] = d[field]
-        self.count = count
+                self.log[topic][field][self.count] = d[field]
 
     def finalize(self):
         for topic in self.subs.keys():
@@ -263,5 +264,3 @@ class DiscreteKalmanFilter(PeriodicProcess):
         # publish
         self.data['xh'] = self.xh
         self.data['xh_time_stamp'] = t
-
-
