@@ -2,12 +2,20 @@ import scipy.integrate
 import numpy as np
 import collections
 import time
+import uorb
+import copy
 
 
-GPS_topic = collections.namedtuple(
-    'GPS_topic',
-    ['time_stamp', 'lat', 'lon', 'alt'])
+def dict_to_namedtuple(name, d):
+    return collections.namedtuple(name, d.keys())(**d)
 
+
+def nested_dict_to_namedtuple(d):
+    d = copy.copy(d)
+    for key in d.keys():
+        d[key] = dict_to_namedtuple(key, d[key])
+    d = dict_to_namedtuple('d', d)
+    return d
 
 class PeriodicProcess(object):
 
@@ -73,6 +81,74 @@ class PeriodicScheduler(object):
             t = t + period
         for process in self.process_list:
             process.finalize()
+
+
+class Estimator(PeriodicProcess):
+
+    def __init__(self, period, uorb_manager):
+        super(Estimator, self).__init__(period)
+        self.uorb_manager = uorb_manager
+
+    def initialize(self, t):
+        super(Estimator, self).initialize(t)
+        data = uorb.Topic_vehicle_global_position(
+            timestamp=1e6*t, time_gps_usec=0, lat=0, lon=0, alt=0,
+            vel_n=0, vel_e=0, vel_d=0, yaw=0, eph=0, epv=0)
+        self.pos = uorb.Publication(
+            self.uorb_manager,
+            'vehicle_global_position', data)
+
+    def run(self, t):
+        self.pos.data.timestamp = 1e6*t
+        self.pos.data.alt = np.sin(t)
+        self.pos.publish()
+
+
+class Logger(PeriodicProcess):
+
+    def __init__(self, period, tf, uorb_manager):
+        super(Logger, self).__init__(period)
+        self.uorb_manager = uorb_manager
+        self.topics = ['vehicle_global_position']
+        self.subs = {}
+        self.log = {}
+        self.tf = tf
+        self.n_t = int(self.tf/self.period) - 1
+
+    def initialize(self, t):
+        super(Logger, self).initialize(t)
+        for topic in self.topics:
+            self.subs[topic] = uorb.Subscription(self.uorb_manager, topic)
+            d = self.subs[topic].data.__dict__
+            self.log[topic] = {}
+            for key in d:
+                self.log[topic][key] = np.array([None]*self.n_t)
+                self.log[topic][key][0] = d[key]
+        self.count = 0
+
+    def run(self, t):
+        count = self.count + 1
+        if count > self.n_t:
+            return
+        for topic in self.subs.keys():
+            self.subs[topic].update()
+            d = self.subs[topic].data.__dict__
+            for field in d.keys():
+                self.log[topic][field][count] = d[field]
+        self.count = count
+
+    def finalize(self):
+        for topic in self.subs.keys():
+            d = self.subs[topic].data.__dict__
+            for field in d.keys():
+                # truncate unused data
+                self.log[topic][field] = self.log[topic][field][:self.count]
+                # try to convert to data type flow, won't work for structs
+                try:
+                    self.log[topic][field] = (
+                        self.log[topic][field]).astype(float)
+                except:
+                    pass
 
 
 class StateFeedbackController(PeriodicProcess):
@@ -189,38 +265,3 @@ class DiscreteKalmanFilter(PeriodicProcess):
         self.data['xh_time_stamp'] = t
 
 
-class Logger(PeriodicProcess):
-
-    def __init__(self, period, tf, data):
-        super(Logger, self).__init__(period)
-        self.data = data
-        self.log = {}
-        self.tf = tf
-        self.n_t = np.floor(tf/period)
-
-    def initialize(self, t):
-        n_t = self.n_t
-        super(Logger, self).initialize(t)
-        for key in self.data.keys():
-            self.log[key] = np.zeros((n_t, len(np.array([self.data[key]]))))
-        self.log['t'] = np.zeros((n_t, 1))
-        self.count = -1
-        self.run(t)
-
-    def run(self, t):
-        count = self.count + 1
-        if count >= self.n_t:
-            return
-        log = self.log
-        log['t'][count] = t
-        for key in self.data.keys():
-            log[key][count] = self.data[key]
-        self.count = count
-
-    def finalize(self):
-        for key in self.log.keys():
-            self.log[key] = self.log[key][:self.count, :]
-
-    def get_log_as_namedtuple(self):
-        return collections.namedtuple(
-            'log', self.log.keys())(**(self.log))
