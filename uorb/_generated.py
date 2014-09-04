@@ -2,9 +2,8 @@
 # automatically generated using uorb/generate.py
 # edit uorb/uorb.xml
 
-generation_timestamp = '2014-09-03 16:15:21'
+generation_timestamp = '2014-09-03 23:24:41'
 
-from collections import namedtuple
 import numpy as np
 
 
@@ -30,7 +29,7 @@ class Topic_actuator_armed(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'armed', 'ready_to_arm', 'lockdown', 'force_failsafe')
 
     @property
     def _values(self):
@@ -62,7 +61,7 @@ class Topic_actuator_controls(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'control')
 
     @property
     def _values(self):
@@ -95,7 +94,7 @@ class Topic_actuator_outputs(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'output', 'noutputs')
 
     @property
     def _values(self):
@@ -124,7 +123,7 @@ class Topic_airspeed(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'indicated_airspeed_m_s', 'air_temperature_celsius')
 
     @property
     def _values(self):
@@ -157,7 +156,7 @@ class Topic_battery_status(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'voltage_v', 'voltage_filtered_v', 'current_a', 'discharged_mah')
 
     @property
     def _values(self):
@@ -188,7 +187,7 @@ class Topic_debug_key_value(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp_ms', 'key', 'value')
 
     @property
     def _values(self):
@@ -223,7 +222,7 @@ class Topic_differential_pressure(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'error_count', 'differential_pressure_raw_pa', 'differential_pressure_filtered_pa', 'max_differential_pressure_pa', 'temperature')
 
     @property
     def _values(self):
@@ -252,7 +251,7 @@ class Topic_encoders(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'counts', 'velocity')
 
     @property
     def _values(self):
@@ -283,7 +282,7 @@ class Topic_esc_status(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('counter', 'timestamp', 'esc_count', 'esc')
 
     @property
     def _values(self):
@@ -320,7 +319,7 @@ class Topic_estimator_status(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'states', 'n_states', 'nan_flags', 'health_flags', 'timeout_flags')
 
     @property
     def _values(self):
@@ -347,7 +346,7 @@ class Topic_fence(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('count', 'vertices')
 
     @property
     def _values(self):
@@ -380,7 +379,7 @@ class Topic_filtered_bottom_flow(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'sumx', 'sumy', 'vx', 'vy')
 
     @property
     def _values(self):
@@ -417,7 +416,7 @@ class Topic_home_position(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'lat', 'lon', 'alt', 'x', 'y', 'z')
 
     @property
     def _values(self):
@@ -442,7 +441,7 @@ class Topic_manual_control_setpoint(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -467,7 +466,7 @@ class Topic_mission(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -492,7 +491,7 @@ class Topic_mission_result(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -517,7 +516,7 @@ class Topic_navigation_capabilities(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -542,7 +541,7 @@ class Topic_offboard_control_setpoint(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -567,7 +566,7 @@ class Topic_omnidirectional_flow(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -592,7 +591,7 @@ class Topic_optical_flow(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -617,7 +616,7 @@ class Topic_parameter_update(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -642,7 +641,7 @@ class Topic_positional_setpoint_triplet(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -667,7 +666,7 @@ class Topic_rc_channels(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -692,7 +691,7 @@ class Topic_safety(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -717,7 +716,7 @@ class Topic_satellite_info(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -742,7 +741,7 @@ class Topic_sensor_combined(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -767,7 +766,7 @@ class Topic_servorail_status(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -792,7 +791,7 @@ class Topic_subsystem_info(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -817,7 +816,7 @@ class Topic_system_power(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -842,7 +841,7 @@ class Topic_tecs_status(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -867,7 +866,7 @@ class Topic_telemetry_status(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -923,7 +922,7 @@ class Topic_vehicle_attitude(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'roll', 'pitch', 'yaw', 'rollspeed', 'pitchspeed', 'yawspeed', 'rollacc', 'pitchacc', 'yawacc', 'rate_offsets', 'R', 'q', 'g_comp', 'R_valid', 'q_valid')
 
     @property
     def _values(self):
@@ -974,7 +973,7 @@ class Topic_vehicle_attitude_setpoint(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'roll_body', 'pitch_body', 'yaw_body', 'R_body', 'R_valid', 'q_d', 'q_d_valid', 'q_e', 'q_e_valid', 'thrust', 'roll_reset_integral', 'pitch_reset_integral', 'yaw_reset_integral')
 
     @property
     def _values(self):
@@ -999,7 +998,7 @@ class Topic_vehicle_bodyframe_speed_setpoint(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1024,7 +1023,7 @@ class Topic_vehicle_command(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1049,7 +1048,7 @@ class Topic_vehicle_control_mode(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1074,7 +1073,7 @@ class Topic_vehicle_force_setpoint(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1119,7 +1118,7 @@ class Topic_vehicle_global_position(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'time_gps_usec', 'lat', 'lon', 'alt', 'vel_n', 'vel_e', 'vel_d', 'yaw', 'eph', 'epv')
 
     @property
     def _values(self):
@@ -1144,7 +1143,7 @@ class Topic_vehicle_global_velocity_setpoint(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1169,7 +1168,7 @@ class Topic_vehicle_gps_position(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1194,7 +1193,7 @@ class Topic_vehicle_local_position(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1227,7 +1226,7 @@ class Topic_vehicle_local_position_setpoint(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'x', 'y', 'z', 'yaw')
 
     @property
     def _values(self):
@@ -1260,7 +1259,7 @@ class Topic_vehicle_rates_setpoint(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'roll', 'pitch', 'yaw', 'thrust')
 
     @property
     def _values(self):
@@ -1285,7 +1284,7 @@ class Topic_vehicle_status(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1310,7 +1309,7 @@ class Topic_vehicle_vicon_position(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1335,7 +1334,7 @@ class Topic_vehicle_vicon_estimate(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp')
 
     @property
     def _values(self):
@@ -1368,7 +1367,7 @@ class Topic_wind_estimate(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ('timestamp', 'windspeed_north', 'windspeed_east', 'covariance_north', 'covariance_east')
 
     @property
     def _values(self):

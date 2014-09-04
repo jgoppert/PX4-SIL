@@ -9,7 +9,6 @@ uorb_file_header = '''# Do not edit!
 
 generation_timestamp = '{timestamp:s}'
 
-from collections import namedtuple
 import numpy as np
 
 '''
@@ -29,7 +28,7 @@ class Topic_{name:s}(object):
 
     @property
     def _fields(self):
-        return tuple(self.__slots__)
+        return ({str_field_names:s})
 
     @property
     def _values(self):
