@@ -16,7 +16,8 @@ class Topic_{name:s}(object):
     """
     {doc_string:s}
 
-    Input:
+    Parameters
+    ----------
         {attrib_doc_string:s}
     """
 
@@ -51,11 +52,13 @@ with open('_generated.py', 'w') as f:
 
         # create arg list
         field_names = []
+        field_names_init = []
         self_field_names = []
         str_field_names = []
         attrib_doc_strings = []
         for field in topic.findall('field'):
             field_names.append(field.attrib['name'])
+            field_names_init.append(field.attrib['name'] + '=None')
             field_descr = field.text
             field_name = field.attrib['name']
             self_field_names.append('self.'+field_name)
@@ -65,7 +68,7 @@ with open('_generated.py', 'w') as f:
         self_field_names = string.join(self_field_names, ', ')
         arg_list = string.join(field_names, ','+indent12)
         arg_list_space = string.join(field_names, ' ')
-        arg_list_comma = string.join(field_names, ', ')
+        arg_list_comma = string.join(field_names_init, ',' +indent12)
         attrib_doc_string = string.join(attrib_doc_strings, indent8)
 
         # create init list
