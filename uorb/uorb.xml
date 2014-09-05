@@ -209,8 +209,55 @@
 
     <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <topic name="sensor_combined">
-        <description></description>
+        <description>Sensor readings in raw and SI-unit form.
+    These values are read from the sensors. Raw values are in sensor-specific units,
+    the scaled values are in SI-units, as visible from the ending of the variable
+    or the comments. The use of the SI fields is in general advised, as these fields
+    are scaled and offset-compensated where possible and do not change with board
+    revisions and sensor updates.
+        </description>
         <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="gyro_raw" type="int16_t[3]">Raw sensor values of angular velocity.</field>
+        <field name="gyro_rad_s" type="float[3]">Angular velocity in radian per seconds.</field>
+        <field name="accelerometer_raw" type="int16_t[3]"> Raw acceleration in NED body frame.</field>
+        <field name="accelerometer_m_s2" type="float[3]">Acceleration in NED body frame, in m/s^2.</field>
+        <field name="accelerometer_mode" type="int">Accelerometer measurement mode.</field>
+        <field name="accelerometer_range_m_s2" type="float">Accelerometer measurement range in m/s^2.</field>
+        <field name="accelerometer_timestamp" type="uint64_t">Accelerometer timestamp.</field>
+        <field name="magnetometer_raw" type="int16_t[3]">Raw magnetic field in NED body frame.</field>
+        <field name="magnetometer_ga" type="float[3]">Magnetic field in NED body frame, in Gauss.</field>
+        <field name="magnetometer_mode" type="int">Magnetometer measurement mode.</field>
+        <field name="magnetometer_range_ga" type="float"> +/- measurement range in Gauss.</field>
+        <field name="magnetometer_cuttoff_freq_hz" type="float">Internal analog low pass frequency of sensor.</field>
+        <field name="magnetometer_timestamp" type="uint64_t">Magnetometer timestamp.</field>
+        <field name="gyro1_raw" type="int16_t[3]">Raw sensor values of angular velocity.</field>
+        <field name="gyro1_rad_s" type="float[3]">Angular velocity in radian per seconds.</field>
+        <field name="gyro1_timestamp" type="uint64_t">Gyro timestamp.</field>
+        <field name="accelerometer1_raw" type="int16_t[3]">Raw acceleration in NED body frame.</field>
+        <field name="accelerometer1_m_s2" type="float[3]">Acceleration in NED body frame, in m/s^2.</field>
+        <field name="accelerometer1_timestamp" type="uint64_t">Accelerometer timestamp.</field>
+        <field name="magnetometer1_raw" type="int16_t[3]">Raw magnetic field in NED body frame</field>
+        <field name="magnetometer1_ga" type="float[3]">Magnetic field in NED body frame, in Gauss</field>
+        <field name="magnetometer1_timestamp" type="uint64_t">Magnetometer timestamp.</field>
+        <field name="gyro2_raw" type="int16_t[3]">Raw sensor values of angular velocity.</field>
+        <field name="gyro2_rad_s" type="float[3]">Angular velocity in radian per seconds.</field>
+        <field name="gyro2_timestamp" type="uint64_t">Gyro timestamp.</field>
+        <field name="accelerometer2_raw" type="int16_t[3]">Raw acceleration in NED body frame.</field>
+        <field name="accelerometer2_m_s2" type="float[3]">Acceleration in NED body frame, in m/s^2.</field>
+        <field name="accelerometer2_timestamp" type="uint64_t">Accelerometer timestamp.</field>
+        <field name="magnetometer2_raw" type="int16_t[3]">Raw magnetic field in NED body frame.</field>
+        <field name="magnetometer2_ga" type="float[3]">Magnetic field in NED body frame, in Gauss.</field>
+        <field name="magnetometer2_timestamp" type="uint64_t">Magnetometer timestamp.</field>
+        <field name="baro_pres_mbar" type="float">Barometric pressure, already temp. comp.</field>
+        <field name="baro_alt_meter" type="float">Altitude, already temp. comp.</field>
+        <field name="baro_temp_celcius" type="float">Temperature in degrees celsius.</field>
+        <field name="adc_voltage_v" type="float[10]">ADC voltages of ADC Chan 10/11/12/13 or -1.</field>
+        <field name="adc_mapping type" type="unsigned[10]">Channel indices of each of these values.</field>
+        <field name="mcu_temp_celcius" type="float">Internal temperature measurement of MCU.</field>
+        <field name="baro_timestamp" type="uint64_t">Barometer timestamp.</field>
+        <field name="differential_pressure_pa" type="float">Airspeed sensor differential pressure.</field>
+        <field name="differential_pressure_timestamp" type="uint64_t">Last measurement timestamp.</field>
+        <field name="differential_pressure_filtered_pa" type="float">Low pass filtered airspeed sensor differential pressure reading.</field>
     </topic>
 
     <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -389,6 +436,27 @@
         <field name="windspeed_east" type="float">Wind component in east/ Y direction.</field>
         <field name="covariance_north" type="float">Uncertainty in north/ X direction. Set to zero (no uncertainty) if not estimated.</field>
         <field name="covariance_east" type="float">Uncertainty in east/ Y direction. Set to zero (no uncertainty) if not estimated.</field>
+    </topic>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <topic name="sim_state">
+        <description>Simulated aircraft state.</description>
+        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="roll" type="float">Roll angle (rad, Tait-Bryan, NED)</field>
+        <field name="pitch" type="float">Pitch angle (rad, Tait-Bryan, NED)</field>
+        <field name="yaw" type="float">Yaw angle (rad, Tait-Bryan, NED)</field>
+        <field name="rollspeed" type="float">Roll anglular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="pitchspeed" type="float">Pitch angular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="yawspeed" type="float">Yaw angular speed (rad/s, Tait-Bryan, NED)</field>
+        <field name="lat" type="double">Latitude in degrees.</field>
+        <field name="lon" type="double">Longitude in degrees.</field>
+        <field name="alt" type="float">Altitude in meteres.</field>
+        <field name="vx" type="float">Ground speed x(latitude) m/s.</field>
+        <field name="vy" type="float">Ground speed y(longitude) m/s.</field>
+        <field name="vz" type="float">Ground speed z(altitude) m.</field>
+        <field name="xacc" type="float">X acceleration m/s^2.</field>
+        <field name="yacc" type="float">X acceleration m/s^2.</field>
+        <field name="zacc" type="float">X acceleration m/s^2.</field>
     </topic>
 
 </uorb>

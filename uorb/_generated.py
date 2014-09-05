@@ -2,7 +2,7 @@
 # automatically generated using uorb/generate.py
 # edit uorb/uorb.xml
 
-generation_timestamp = '2014-09-04 09:38:18'
+generation_timestamp = '2014-09-04 23:04:21'
 
 
 class Topic_actuator_armed(object):
@@ -727,22 +727,110 @@ class Topic_satellite_info(object):
 
 class Topic_sensor_combined(object):
     """
-    None
+    Sensor readings in raw and SI-unit form.
+    These values are read from the sensors. Raw values are in sensor-specific units,
+    the scaled values are in SI-units, as visible from the ending of the variable
+    or the comments. The use of the SI fields is in general advised, as these fields
+    are scaled and offset-compensated where possible and do not change with board
+    revisions and sensor updates.
+        
 
     Input:
         timestamp : Microseconds since system boot.
+        gyro_raw : Raw sensor values of angular velocity.
+        gyro_rad_s : Angular velocity in radian per seconds.
+        accelerometer_raw :  Raw acceleration in NED body frame.
+        accelerometer_m_s2 : Acceleration in NED body frame, in m/s^2.
+        accelerometer_mode : Accelerometer measurement mode.
+        accelerometer_range_m_s2 : Accelerometer measurement range in m/s^2.
+        accelerometer_timestamp : Accelerometer timestamp.
+        magnetometer_raw : Raw magnetic field in NED body frame.
+        magnetometer_ga : Magnetic field in NED body frame, in Gauss.
+        magnetometer_mode : Magnetometer measurement mode.
+        magnetometer_range_ga :  +/- measurement range in Gauss.
+        magnetometer_cuttoff_freq_hz : Internal analog low pass frequency of sensor.
+        magnetometer_timestamp : Magnetometer timestamp.
+        gyro1_raw : Raw sensor values of angular velocity.
+        gyro1_rad_s : Angular velocity in radian per seconds.
+        gyro1_timestamp : Gyro timestamp.
+        accelerometer1_raw : Raw acceleration in NED body frame.
+        accelerometer1_m_s2 : Acceleration in NED body frame, in m/s^2.
+        accelerometer1_timestamp : Accelerometer timestamp.
+        magnetometer1_raw : Raw magnetic field in NED body frame
+        magnetometer1_ga : Magnetic field in NED body frame, in Gauss
+        magnetometer1_timestamp : Magnetometer timestamp.
+        gyro2_raw : Raw sensor values of angular velocity.
+        gyro2_rad_s : Angular velocity in radian per seconds.
+        gyro2_timestamp : Gyro timestamp.
+        accelerometer2_raw : Raw acceleration in NED body frame.
+        accelerometer2_m_s2 : Acceleration in NED body frame, in m/s^2.
+        accelerometer2_timestamp : Accelerometer timestamp.
+        magnetometer2_raw : Raw magnetic field in NED body frame.
+        magnetometer2_ga : Magnetic field in NED body frame, in Gauss.
+        magnetometer2_timestamp : Magnetometer timestamp.
+        baro_pres_mbar : Barometric pressure, already temp. comp.
+        baro_alt_meter : Altitude, already temp. comp.
+        baro_temp_celcius : Temperature in degrees celsius.
+        adc_voltage_v : ADC voltages of ADC Chan 10/11/12/13 or -1.
+        adc_mapping type : Channel indices of each of these values.
+        mcu_temp_celcius : Internal temperature measurement of MCU.
+        baro_timestamp : Barometer timestamp.
+        differential_pressure_pa : Airspeed sensor differential pressure.
+        differential_pressure_timestamp : Last measurement timestamp.
+        differential_pressure_filtered_pa : Low pass filtered airspeed sensor differential pressure reading.
     """
 
-    def __init__(self, timestamp):
+    def __init__(self, timestamp, gyro_raw, gyro_rad_s, accelerometer_raw, accelerometer_m_s2, accelerometer_mode, accelerometer_range_m_s2, accelerometer_timestamp, magnetometer_raw, magnetometer_ga, magnetometer_mode, magnetometer_range_ga, magnetometer_cuttoff_freq_hz, magnetometer_timestamp, gyro1_raw, gyro1_rad_s, gyro1_timestamp, accelerometer1_raw, accelerometer1_m_s2, accelerometer1_timestamp, magnetometer1_raw, magnetometer1_ga, magnetometer1_timestamp, gyro2_raw, gyro2_rad_s, gyro2_timestamp, accelerometer2_raw, accelerometer2_m_s2, accelerometer2_timestamp, magnetometer2_raw, magnetometer2_ga, magnetometer2_timestamp, baro_pres_mbar, baro_alt_meter, baro_temp_celcius, adc_voltage_v, adc_mapping type, mcu_temp_celcius, baro_timestamp, differential_pressure_pa, differential_pressure_timestamp, differential_pressure_filtered_pa):
         self.timestamp = timestamp
+        self.gyro_raw = gyro_raw
+        self.gyro_rad_s = gyro_rad_s
+        self.accelerometer_raw = accelerometer_raw
+        self.accelerometer_m_s2 = accelerometer_m_s2
+        self.accelerometer_mode = accelerometer_mode
+        self.accelerometer_range_m_s2 = accelerometer_range_m_s2
+        self.accelerometer_timestamp = accelerometer_timestamp
+        self.magnetometer_raw = magnetometer_raw
+        self.magnetometer_ga = magnetometer_ga
+        self.magnetometer_mode = magnetometer_mode
+        self.magnetometer_range_ga = magnetometer_range_ga
+        self.magnetometer_cuttoff_freq_hz = magnetometer_cuttoff_freq_hz
+        self.magnetometer_timestamp = magnetometer_timestamp
+        self.gyro1_raw = gyro1_raw
+        self.gyro1_rad_s = gyro1_rad_s
+        self.gyro1_timestamp = gyro1_timestamp
+        self.accelerometer1_raw = accelerometer1_raw
+        self.accelerometer1_m_s2 = accelerometer1_m_s2
+        self.accelerometer1_timestamp = accelerometer1_timestamp
+        self.magnetometer1_raw = magnetometer1_raw
+        self.magnetometer1_ga = magnetometer1_ga
+        self.magnetometer1_timestamp = magnetometer1_timestamp
+        self.gyro2_raw = gyro2_raw
+        self.gyro2_rad_s = gyro2_rad_s
+        self.gyro2_timestamp = gyro2_timestamp
+        self.accelerometer2_raw = accelerometer2_raw
+        self.accelerometer2_m_s2 = accelerometer2_m_s2
+        self.accelerometer2_timestamp = accelerometer2_timestamp
+        self.magnetometer2_raw = magnetometer2_raw
+        self.magnetometer2_ga = magnetometer2_ga
+        self.magnetometer2_timestamp = magnetometer2_timestamp
+        self.baro_pres_mbar = baro_pres_mbar
+        self.baro_alt_meter = baro_alt_meter
+        self.baro_temp_celcius = baro_temp_celcius
+        self.adc_voltage_v = adc_voltage_v
+        self.adc_mapping type = adc_mapping type
+        self.mcu_temp_celcius = mcu_temp_celcius
+        self.baro_timestamp = baro_timestamp
+        self.differential_pressure_pa = differential_pressure_pa
+        self.differential_pressure_timestamp = differential_pressure_timestamp
+        self.differential_pressure_filtered_pa = differential_pressure_filtered_pa
 
     @property
     def _fields(self):
-        return ('timestamp')
+        return ('timestamp', 'gyro_raw', 'gyro_rad_s', 'accelerometer_raw', 'accelerometer_m_s2', 'accelerometer_mode', 'accelerometer_range_m_s2', 'accelerometer_timestamp', 'magnetometer_raw', 'magnetometer_ga', 'magnetometer_mode', 'magnetometer_range_ga', 'magnetometer_cuttoff_freq_hz', 'magnetometer_timestamp', 'gyro1_raw', 'gyro1_rad_s', 'gyro1_timestamp', 'accelerometer1_raw', 'accelerometer1_m_s2', 'accelerometer1_timestamp', 'magnetometer1_raw', 'magnetometer1_ga', 'magnetometer1_timestamp', 'gyro2_raw', 'gyro2_rad_s', 'gyro2_timestamp', 'accelerometer2_raw', 'accelerometer2_m_s2', 'accelerometer2_timestamp', 'magnetometer2_raw', 'magnetometer2_ga', 'magnetometer2_timestamp', 'baro_pres_mbar', 'baro_alt_meter', 'baro_temp_celcius', 'adc_voltage_v', 'adc_mapping type', 'mcu_temp_celcius', 'baro_timestamp', 'differential_pressure_pa', 'differential_pressure_timestamp', 'differential_pressure_filtered_pa')
 
     @property
     def _values(self):
-        return (self.timestamp)
+        return (self.timestamp, self.gyro_raw, self.gyro_rad_s, self.accelerometer_raw, self.accelerometer_m_s2, self.accelerometer_mode, self.accelerometer_range_m_s2, self.accelerometer_timestamp, self.magnetometer_raw, self.magnetometer_ga, self.magnetometer_mode, self.magnetometer_range_ga, self.magnetometer_cuttoff_freq_hz, self.magnetometer_timestamp, self.gyro1_raw, self.gyro1_rad_s, self.gyro1_timestamp, self.accelerometer1_raw, self.accelerometer1_m_s2, self.accelerometer1_timestamp, self.magnetometer1_raw, self.magnetometer1_ga, self.magnetometer1_timestamp, self.gyro2_raw, self.gyro2_rad_s, self.gyro2_timestamp, self.accelerometer2_raw, self.accelerometer2_m_s2, self.accelerometer2_timestamp, self.magnetometer2_raw, self.magnetometer2_ga, self.magnetometer2_timestamp, self.baro_pres_mbar, self.baro_alt_meter, self.baro_temp_celcius, self.adc_voltage_v, self.adc_mapping type, self.mcu_temp_celcius, self.baro_timestamp, self.differential_pressure_pa, self.differential_pressure_timestamp, self.differential_pressure_filtered_pa)
 
     def __str__(self):
         return str(self._fields) + ' ' + str(self._values)
@@ -1369,6 +1457,61 @@ class Topic_wind_estimate(object):
     @property
     def _values(self):
         return (self.timestamp, self.windspeed_north, self.windspeed_east, self.covariance_north, self.covariance_east)
+
+    def __str__(self):
+        return str(self._fields) + ' ' + str(self._values)
+
+    __repr__ = __str__
+
+
+class Topic_sim_state(object):
+    """
+    Simulated aircraft state.
+
+    Input:
+        timestamp : Microseconds since system boot.
+        roll : Roll angle (rad, Tait-Bryan, NED)
+        pitch : Pitch angle (rad, Tait-Bryan, NED)
+        yaw : Yaw angle (rad, Tait-Bryan, NED)
+        rollspeed : Roll anglular speed (rad/s, Tait-Bryan, NED)
+        pitchspeed : Pitch angular speed (rad/s, Tait-Bryan, NED)
+        yawspeed : Yaw angular speed (rad/s, Tait-Bryan, NED)
+        lat : Latitude in degrees.
+        lon : Longitude in degrees.
+        alt : Altitude in meteres.
+        vx : Ground speed x(latitude) m/s.
+        vy : Ground speed y(longitude) m/s.
+        vz : Ground speed z(altitude) m.
+        xacc : X acceleration m/s^2.
+        yacc : X acceleration m/s^2.
+        zacc : X acceleration m/s^2.
+    """
+
+    def __init__(self, timestamp, roll, pitch, yaw, rollspeed, pitchspeed, yawspeed, lat, lon, alt, vx, vy, vz, xacc, yacc, zacc):
+        self.timestamp = timestamp
+        self.roll = roll
+        self.pitch = pitch
+        self.yaw = yaw
+        self.rollspeed = rollspeed
+        self.pitchspeed = pitchspeed
+        self.yawspeed = yawspeed
+        self.lat = lat
+        self.lon = lon
+        self.alt = alt
+        self.vx = vx
+        self.vy = vy
+        self.vz = vz
+        self.xacc = xacc
+        self.yacc = yacc
+        self.zacc = zacc
+
+    @property
+    def _fields(self):
+        return ('timestamp', 'roll', 'pitch', 'yaw', 'rollspeed', 'pitchspeed', 'yawspeed', 'lat', 'lon', 'alt', 'vx', 'vy', 'vz', 'xacc', 'yacc', 'zacc')
+
+    @property
+    def _values(self):
+        return (self.timestamp, self.roll, self.pitch, self.yaw, self.rollspeed, self.pitchspeed, self.yawspeed, self.lat, self.lon, self.alt, self.vx, self.vy, self.vz, self.xacc, self.yacc, self.zacc)
 
     def __str__(self):
         return str(self._fields) + ' ' + str(self._values)
