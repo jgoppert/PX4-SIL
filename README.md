@@ -14,4 +14,5 @@ Use cases (goals):
 3. Develop a control system for a new vehicle. Find equations of motion in sympy, store expressions in lambda functions to pass to numpy, integrate with scipy.integrate.ode. Test control systems against simulated dynamics.
 
 You can view the ipython notebooks using notebook viewer, for example:
-http://nbviewer.ipython.org/github/jgoppert/PX4-SIL/blob/master/PeriodicSim.ipynb
+* Visit http://nbviewer.ipython.org/github/jgoppert/PX4-SIL/tree/master/
+* Click on any of the notebooks with the .ipynb file extension.
