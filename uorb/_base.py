@@ -45,7 +45,7 @@ class Manager(object):
         elif self.copy_type == 'shallow':
             return copy.copy(data)
         elif self.copy_type == 'deep':
-            return copy.copy(data)
+            return copy.deepcopy(data)
         else:
             raise ValueError('unknown copy type')
 
