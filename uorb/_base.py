@@ -6,10 +6,23 @@ __all__ = ['Manager', 'Subscription', 'Publication']
 
 class Manager(object):
 
-    def __init__(self):
+    def __init__(self, copy_type='pointer'):
+        """
+        Parameters
+        ----------
+
+        copy_type : {'pointer', 'shallow', 'deep'}
+            (Pointer) copying will be fast and safe if all modules are in the
+            same thread.
+            (Shallow) copying will be safe in muultithreading
+            as long as object are not compound objects but will be slower.
+            (Deep) copying will
+            be safe no matter what but will be very slow.
+        """
         self._topics = {}
         self._publisher_handle = {}
         self._subscriber_handle = {}
+        self.copy_type = copy_type
 
     def advertise(self, name):
         if name in self._topics.keys():
@@ -23,6 +36,16 @@ class Manager(object):
         }
         return handle
 
+    def _copy_type(self, data):
+        if self.copy_type == 'pointer':
+            return data
+        elif self.copy_type == 'shallow':
+            return copy.copy(data)
+        elif self.copy_type == 'deep':
+            return copy.copy(data)
+        else:
+            raise ValueError('unknown copy type')
+
     def unadvertise(self, handle):
         name = self._publisher_handle[handle]
         self._topics.pop(name, None)
@@ -30,7 +53,7 @@ class Manager(object):
 
     def publish(self, handle, data):
         name = self._publisher_handle[handle]
-        self._topics[name]['data'] = copy.copy(data)
+        self._topics[name]['data'] = self._copy_type(data)
         for sub_handle in self._topics[name]['subscribers'].keys():
             self._topics[name]['subscribers'][sub_handle]['updated'] = True
 
@@ -57,7 +80,7 @@ class Manager(object):
     def copy(self, handle):
         name = self._subscriber_handle[handle]
         self._topics[name]['subscribers'][handle]['updated'] = False
-        return copy.copy(self._topics[name]['data'])
+        return self._copy_type(self._topics[name]['data'])
 
 
 class Subscription(object):
