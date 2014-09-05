@@ -18,7 +18,7 @@ class Topic_{name:s}(object):
 
     Parameters
     ----------
-        {attrib_doc_string:s}
+    {attrib_doc_string:s}
     """
 
     def __init__(self, {arg_list_comma:s}):
@@ -38,9 +38,10 @@ class Topic_{name:s}(object):
     __repr__ = __str__
 '''
 topic_attribute_init = "self.{field_name:s} = {field_name:s}"
-attrib_doc = "{field_name:s} : {field_descr:s}"
+attrib_doc = "{field_name:s} :\n        {field_descr:s}"
 indent12 = "\n            "
 indent8 = "\n        "
+indent4 = "\n    "
 timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 
 with open('_generated.py', 'w') as f:
@@ -69,7 +70,7 @@ with open('_generated.py', 'w') as f:
         arg_list = string.join(field_names, ','+indent12)
         arg_list_space = string.join(field_names, ' ')
         arg_list_comma = string.join(field_names_init, ',' +indent12)
-        attrib_doc_string = string.join(attrib_doc_strings, indent8)
+        attrib_doc_string = string.join(attrib_doc_strings, indent4)
 
         # create init list
         init_list = []

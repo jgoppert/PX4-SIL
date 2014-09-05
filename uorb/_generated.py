@@ -2,7 +2,7 @@
 # automatically generated using uorb/generate.py
 # edit uorb/uorb.xml
 
-generation_timestamp = '2014-09-04 23:38:58'
+generation_timestamp = '2014-09-05 14:32:12'
 
 
 class Topic_actuator_armed(object):
@@ -11,11 +11,16 @@ class Topic_actuator_armed(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        armed : Set to true if system is armed.
-        ready_to_arm : Set to true if system is ready to be armed.
-        lockdown : Set to true if actuators are forcibly disabled (due to emergency or HIL).
-        force_failsafe : Set to true if actuators are forced to the failsafe position.
+    timestamp :
+        Microseconds since system boot.
+    armed :
+        Set to true if system is armed.
+    ready_to_arm :
+        Set to true if system is ready to be armed.
+    lockdown :
+        Set to true if actuators are forcibly disabled (due to emergency or HIL).
+    force_failsafe :
+        Set to true if actuators are forced to the failsafe position.
     """
 
     def __init__(self, timestamp=None,
@@ -54,8 +59,10 @@ class Topic_actuator_controls(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        control : The control values in natural units.
+    timestamp :
+        Microseconds since system boot.
+    control :
+        The control values in natural units.
     """
 
     def __init__(self, timestamp=None,
@@ -87,9 +94,12 @@ class Topic_actuator_outputs(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        output : Output data in natural output units.
-        noutputs : Number of valid outputs.
+    timestamp :
+        Microseconds since system boot.
+    output :
+        Output data in natural output units.
+    noutputs :
+        Number of valid outputs.
     """
 
     def __init__(self, timestamp=None,
@@ -119,9 +129,12 @@ class Topic_airspeed(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        indicated_airspeed_m_s : Indicated airspeed in meters per second, -1 if unknown.
-        air_temperature_celsius : Air temperature in degrees celsius, -1000 if unknown.
+    timestamp :
+        Microseconds since system boot.
+    indicated_airspeed_m_s :
+        Indicated airspeed in meters per second, -1 if unknown.
+    air_temperature_celsius :
+        Air temperature in degrees celsius, -1000 if unknown.
     """
 
     def __init__(self, timestamp=None,
@@ -151,11 +164,16 @@ class Topic_battery_status(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        voltage_v : Battery voltage in volts, 0 if unknown.
-        voltage_filtered_v : Battery voltage filtered in volts, 0 if unknown.
-        current_a : Battery current in amperes, -1 if unknown.
-        discharged_mah : Discharged amount in mAh.
+    timestamp :
+        Microseconds since system boot.
+    voltage_v :
+        Battery voltage in volts, 0 if unknown.
+    voltage_filtered_v :
+        Battery voltage filtered in volts, 0 if unknown.
+    current_a :
+        Battery current in amperes, -1 if unknown.
+    discharged_mah :
+        Discharged amount in mAh.
     """
 
     def __init__(self, timestamp=None,
@@ -191,9 +209,12 @@ class Topic_debug_key_value(object):
 
     Parameters
     ----------
-        timestamp_ms : Milliseconds since system boot.
-        key :  max 10 charasters as key.
-        value : The value to send as debug output.
+    timestamp_ms :
+        Milliseconds since system boot.
+    key :
+         max 10 charasters as key.
+    value :
+        The value to send as debug output.
     """
 
     def __init__(self, timestamp_ms=None,
@@ -223,12 +244,18 @@ class Topic_differential_pressure(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot, needed to integrate.
-        error_count : Number of errors detected by driver.
-        differential_pressure_raw_pa :  Raw differential pressure reading (may be negative).
-        differential_pressure_filtered_pa :  Low pass filtered differential pressure reading (may be negative).
-        max_differential_pressure_pa : The value to send as debug output.
-        temperature : Temperature provided by sensor, celsius, -1000.0f if unknown.
+    timestamp :
+        Microseconds since system boot, needed to integrate.
+    error_count :
+        Number of errors detected by driver.
+    differential_pressure_raw_pa :
+         Raw differential pressure reading (may be negative).
+    differential_pressure_filtered_pa :
+         Low pass filtered differential pressure reading (may be negative).
+    max_differential_pressure_pa :
+        The value to send as debug output.
+    temperature :
+        Temperature provided by sensor, celsius, -1000.0f if unknown.
     """
 
     def __init__(self, timestamp=None,
@@ -264,9 +291,12 @@ class Topic_encoders(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        counts : Counts of encoder.
-        velocity : Counts of encoder/second.
+    timestamp :
+        Microseconds since system boot.
+    counts :
+        Counts of encoder.
+    velocity :
+        Counts of encoder/second.
     """
 
     def __init__(self, timestamp=None,
@@ -296,10 +326,14 @@ class Topic_esc_status(object):
 
     Parameters
     ----------
-        counter : Incremented by writing thread everytime new data stored.
-        timestamp : Microseconds since system boot.
-        esc_count : Number of connected ESCs.
-        esc : ESC data structure.
+    counter :
+        Incremented by writing thread everytime new data stored.
+    timestamp :
+        Microseconds since system boot.
+    esc_count :
+        Number of connected ESCs.
+    esc :
+        ESC data structure.
     """
 
     def __init__(self, counter=None,
@@ -333,12 +367,18 @@ class Topic_estimator_status(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        states : Internal filter states.
-        n_states : Number of filter states used.
-        nan_flags : Bitmask to indicate NaN states.
-        health_flags : Bitmask to indicate sensor health (vel, pos, hgt).
-        timeout_flags : Bitmask to indicate timeout (vel, pos, hgt).
+    timestamp :
+        Microseconds since system boot.
+    states :
+        Internal filter states.
+    n_states :
+        Number of filter states used.
+    nan_flags :
+        Bitmask to indicate NaN states.
+    health_flags :
+        Bitmask to indicate sensor health (vel, pos, hgt).
+    timeout_flags :
+        Bitmask to indicate timeout (vel, pos, hgt).
     """
 
     def __init__(self, timestamp=None,
@@ -374,8 +414,10 @@ class Topic_fence(object):
 
     Parameters
     ----------
-        count : Number of actual vertices.
-        vertices : Fence vertices.
+    count :
+        Number of actual vertices.
+    vertices :
+        Fence vertices.
     """
 
     def __init__(self, count=None,
@@ -403,11 +445,16 @@ class Topic_filtered_bottom_flow(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        sumx : Integrated bodyframe x flow in meteres.
-        sumy : Integrated bodyframe x flow in meteres.
-        vx : Flow bodyframe x speed m/s.
-        vy : Flow bodyframe y speed m/s.
+    timestamp :
+        Microseconds since system boot.
+    sumx :
+        Integrated bodyframe x flow in meteres.
+    sumy :
+        Integrated bodyframe x flow in meteres.
+    vx :
+        Flow bodyframe x speed m/s.
+    vy :
+        Flow bodyframe y speed m/s.
     """
 
     def __init__(self, timestamp=None,
@@ -441,13 +488,20 @@ class Topic_home_position(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        lat : Latitude in degrees.
-        lon : Longitude in degrees.
-        alt : Altitude in meteres.
-        x : x coordinate in meters.
-        y : y coordinate in meters.
-        z : z coordinate in meters.
+    timestamp :
+        Microseconds since system boot.
+    lat :
+        Latitude in degrees.
+    lon :
+        Longitude in degrees.
+    alt :
+        Altitude in meteres.
+    x :
+        x coordinate in meters.
+    y :
+        y coordinate in meters.
+    z :
+        z coordinate in meters.
     """
 
     def __init__(self, timestamp=None,
@@ -485,7 +539,8 @@ class Topic_manual_control_setpoint(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -511,7 +566,8 @@ class Topic_mission(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -537,7 +593,8 @@ class Topic_mission_result(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -563,7 +620,8 @@ class Topic_navigation_capabilities(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -589,7 +647,8 @@ class Topic_offboard_control_setpoint(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -615,7 +674,8 @@ class Topic_omnidirectional_flow(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -641,7 +701,8 @@ class Topic_optical_flow(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -667,7 +728,8 @@ class Topic_parameter_update(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -693,7 +755,8 @@ class Topic_positional_setpoint_triplet(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -719,7 +782,8 @@ class Topic_rc_channels(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -745,7 +809,8 @@ class Topic_safety(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -771,7 +836,8 @@ class Topic_satellite_info(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -803,48 +869,90 @@ class Topic_sensor_combined(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        gyro_raw : Raw sensor values of angular velocity.
-        gyro_rad_s : Angular velocity in radian per seconds.
-        accelerometer_raw :  Raw acceleration in NED body frame.
-        accelerometer_m_s2 : Acceleration in NED body frame, in m/s^2.
-        accelerometer_mode : Accelerometer measurement mode.
-        accelerometer_range_m_s2 : Accelerometer measurement range in m/s^2.
-        accelerometer_timestamp : Accelerometer timestamp.
-        magnetometer_raw : Raw magnetic field in NED body frame.
-        magnetometer_ga : Magnetic field in NED body frame, in Gauss.
-        magnetometer_mode : Magnetometer measurement mode.
-        magnetometer_range_ga :  +/- measurement range in Gauss.
-        magnetometer_cuttoff_freq_hz : Internal analog low pass frequency of sensor.
-        magnetometer_timestamp : Magnetometer timestamp.
-        gyro1_raw : Raw sensor values of angular velocity.
-        gyro1_rad_s : Angular velocity in radian per seconds.
-        gyro1_timestamp : Gyro timestamp.
-        accelerometer1_raw : Raw acceleration in NED body frame.
-        accelerometer1_m_s2 : Acceleration in NED body frame, in m/s^2.
-        accelerometer1_timestamp : Accelerometer timestamp.
-        magnetometer1_raw : Raw magnetic field in NED body frame
-        magnetometer1_ga : Magnetic field in NED body frame, in Gauss
-        magnetometer1_timestamp : Magnetometer timestamp.
-        gyro2_raw : Raw sensor values of angular velocity.
-        gyro2_rad_s : Angular velocity in radian per seconds.
-        gyro2_timestamp : Gyro timestamp.
-        accelerometer2_raw : Raw acceleration in NED body frame.
-        accelerometer2_m_s2 : Acceleration in NED body frame, in m/s^2.
-        accelerometer2_timestamp : Accelerometer timestamp.
-        magnetometer2_raw : Raw magnetic field in NED body frame.
-        magnetometer2_ga : Magnetic field in NED body frame, in Gauss.
-        magnetometer2_timestamp : Magnetometer timestamp.
-        baro_pres_mbar : Barometric pressure, already temp. comp.
-        baro_alt_meter : Altitude, already temp. comp.
-        baro_temp_celcius : Temperature in degrees celsius.
-        adc_voltage_v : ADC voltages of ADC Chan 10/11/12/13 or -1.
-        adc_mapping : Channel indices of each of these values.
-        mcu_temp_celcius : Internal temperature measurement of MCU.
-        baro_timestamp : Barometer timestamp.
-        differential_pressure_pa : Airspeed sensor differential pressure.
-        differential_pressure_timestamp : Last measurement timestamp.
-        differential_pressure_filtered_pa : Low pass filtered airspeed sensor differential pressure reading.
+    timestamp :
+        Microseconds since system boot.
+    gyro_raw :
+        Raw sensor values of angular velocity.
+    gyro_rad_s :
+        Angular velocity in radian per seconds.
+    accelerometer_raw :
+         Raw acceleration in NED body frame.
+    accelerometer_m_s2 :
+        Acceleration in NED body frame, in m/s^2.
+    accelerometer_mode :
+        Accelerometer measurement mode.
+    accelerometer_range_m_s2 :
+        Accelerometer measurement range in m/s^2.
+    accelerometer_timestamp :
+        Accelerometer timestamp.
+    magnetometer_raw :
+        Raw magnetic field in NED body frame.
+    magnetometer_ga :
+        Magnetic field in NED body frame, in Gauss.
+    magnetometer_mode :
+        Magnetometer measurement mode.
+    magnetometer_range_ga :
+         +/- measurement range in Gauss.
+    magnetometer_cuttoff_freq_hz :
+        Internal analog low pass frequency of sensor.
+    magnetometer_timestamp :
+        Magnetometer timestamp.
+    gyro1_raw :
+        Raw sensor values of angular velocity.
+    gyro1_rad_s :
+        Angular velocity in radian per seconds.
+    gyro1_timestamp :
+        Gyro timestamp.
+    accelerometer1_raw :
+        Raw acceleration in NED body frame.
+    accelerometer1_m_s2 :
+        Acceleration in NED body frame, in m/s^2.
+    accelerometer1_timestamp :
+        Accelerometer timestamp.
+    magnetometer1_raw :
+        Raw magnetic field in NED body frame
+    magnetometer1_ga :
+        Magnetic field in NED body frame, in Gauss
+    magnetometer1_timestamp :
+        Magnetometer timestamp.
+    gyro2_raw :
+        Raw sensor values of angular velocity.
+    gyro2_rad_s :
+        Angular velocity in radian per seconds.
+    gyro2_timestamp :
+        Gyro timestamp.
+    accelerometer2_raw :
+        Raw acceleration in NED body frame.
+    accelerometer2_m_s2 :
+        Acceleration in NED body frame, in m/s^2.
+    accelerometer2_timestamp :
+        Accelerometer timestamp.
+    magnetometer2_raw :
+        Raw magnetic field in NED body frame.
+    magnetometer2_ga :
+        Magnetic field in NED body frame, in Gauss.
+    magnetometer2_timestamp :
+        Magnetometer timestamp.
+    baro_pres_mbar :
+        Barometric pressure, already temp. comp.
+    baro_alt_meter :
+        Altitude, already temp. comp.
+    baro_temp_celcius :
+        Temperature in degrees celsius.
+    adc_voltage_v :
+        ADC voltages of ADC Chan 10/11/12/13 or -1.
+    adc_mapping :
+        Channel indices of each of these values.
+    mcu_temp_celcius :
+        Internal temperature measurement of MCU.
+    baro_timestamp :
+        Barometer timestamp.
+    differential_pressure_pa :
+        Airspeed sensor differential pressure.
+    differential_pressure_timestamp :
+        Last measurement timestamp.
+    differential_pressure_filtered_pa :
+        Low pass filtered airspeed sensor differential pressure reading.
     """
 
     def __init__(self, timestamp=None,
@@ -952,7 +1060,8 @@ class Topic_servorail_status(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -978,7 +1087,8 @@ class Topic_subsystem_info(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1004,7 +1114,8 @@ class Topic_system_power(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1030,7 +1141,8 @@ class Topic_tecs_status(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1056,7 +1168,8 @@ class Topic_telemetry_status(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1083,22 +1196,38 @@ class Topic_vehicle_attitude(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        roll : Roll angle (rad, Tait-Bryan, NED)
-        pitch : Pitch angle (rad, Tait-Bryan, NED)
-        yaw : Yaw angle (rad, Tait-Bryan, NED)
-        rollspeed : Roll anglular speed (rad/s, Tait-Bryan, NED)
-        pitchspeed : Pitch angular speed (rad/s, Tait-Bryan, NED)
-        yawspeed : Yaw angular speed (rad/s, Tait-Bryan, NED)
-        rollacc : Roll anglular acceleration (rad/s^2, Tait-Bryan, NED)
-        pitchacc : Pitch angular acceleration (rad/s^2, Tait-Bryan, NED)
-        yawacc : Yaw angular acceleration (rad/s^2, Tait-Bryan, NED)
-        rate_offsets : Offsets of the body angular rates from zero
-        R : Rotation matrix body to NED
-        q : Quaternion body to NED
-        g_comp : Compensated gravity vector
-        R_valid : Rotation matrix valid
-        q_valid : Quaternion valid
+    timestamp :
+        Microseconds since system boot.
+    roll :
+        Roll angle (rad, Tait-Bryan, NED)
+    pitch :
+        Pitch angle (rad, Tait-Bryan, NED)
+    yaw :
+        Yaw angle (rad, Tait-Bryan, NED)
+    rollspeed :
+        Roll anglular speed (rad/s, Tait-Bryan, NED)
+    pitchspeed :
+        Pitch angular speed (rad/s, Tait-Bryan, NED)
+    yawspeed :
+        Yaw angular speed (rad/s, Tait-Bryan, NED)
+    rollacc :
+        Roll anglular acceleration (rad/s^2, Tait-Bryan, NED)
+    pitchacc :
+        Pitch angular acceleration (rad/s^2, Tait-Bryan, NED)
+    yawacc :
+        Yaw angular acceleration (rad/s^2, Tait-Bryan, NED)
+    rate_offsets :
+        Offsets of the body angular rates from zero
+    R :
+        Rotation matrix body to NED
+    q :
+        Quaternion body to NED
+    g_comp :
+        Compensated gravity vector
+    R_valid :
+        Rotation matrix valid
+    q_valid :
+        Quaternion valid
     """
 
     def __init__(self, timestamp=None,
@@ -1154,20 +1283,34 @@ class Topic_vehicle_attitude_setpoint(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        roll_body : Roll angle (rad, Tait-Bryan, NED)
-        pitch_body : Pitch angle (rad, Tait-Bryan, NED)
-        yaw_body : Yaw angle (rad, Tait-Bryan, NED)
-        R_body : Rotation matrix of setpoint, body to NED
-        R_valid : Set to true if R_body is valid
-        q_d : Desired quaternion for quaternion control
-        q_d_valid : Set to true if q_d is valid
-        q_e : Attitude error quaternion
-        q_e_valid : Set to true if q_e is valid
-        thrust : Thrust in Newton the power system should generate
-        roll_reset_integral : Reset roll integrator (navigation logic change)
-        pitch_reset_integral : Reset pitch integrator (navigation logic change)
-        yaw_reset_integral : Reset yaw integrator (navigation logic change)
+    timestamp :
+        Microseconds since system boot.
+    roll_body :
+        Roll angle (rad, Tait-Bryan, NED)
+    pitch_body :
+        Pitch angle (rad, Tait-Bryan, NED)
+    yaw_body :
+        Yaw angle (rad, Tait-Bryan, NED)
+    R_body :
+        Rotation matrix of setpoint, body to NED
+    R_valid :
+        Set to true if R_body is valid
+    q_d :
+        Desired quaternion for quaternion control
+    q_d_valid :
+        Set to true if q_d is valid
+    q_e :
+        Attitude error quaternion
+    q_e_valid :
+        Set to true if q_e is valid
+    thrust :
+        Thrust in Newton the power system should generate
+    roll_reset_integral :
+        Reset roll integrator (navigation logic change)
+    pitch_reset_integral :
+        Reset pitch integrator (navigation logic change)
+    yaw_reset_integral :
+        Reset yaw integrator (navigation logic change)
     """
 
     def __init__(self, timestamp=None,
@@ -1219,7 +1362,8 @@ class Topic_vehicle_bodyframe_speed_setpoint(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1245,7 +1389,8 @@ class Topic_vehicle_command(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1271,7 +1416,8 @@ class Topic_vehicle_control_mode(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1297,7 +1443,8 @@ class Topic_vehicle_force_setpoint(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1323,17 +1470,28 @@ class Topic_vehicle_global_position(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        time_gps_usec : GPS timestamp in microseconds.
-        lat : Latitude in degrees.
-        lon : Longitude in degrees.
-        alt : Altitude AMSL in meters.
-        vel_n : Ground north velocity m/s.
-        vel_e : Ground east velocity m/s.
-        vel_d : Ground down velocity m/s.
-        yaw : Yaw in radians -PI..+PI.
-        eph : Standard devation of position estimate horizontally.
-        epv : Standard devation of position estimate vertically.
+    timestamp :
+        Microseconds since system boot.
+    time_gps_usec :
+        GPS timestamp in microseconds.
+    lat :
+        Latitude in degrees.
+    lon :
+        Longitude in degrees.
+    alt :
+        Altitude AMSL in meters.
+    vel_n :
+        Ground north velocity m/s.
+    vel_e :
+        Ground east velocity m/s.
+    vel_d :
+        Ground down velocity m/s.
+    yaw :
+        Yaw in radians -PI..+PI.
+    eph :
+        Standard devation of position estimate horizontally.
+    epv :
+        Standard devation of position estimate vertically.
     """
 
     def __init__(self, timestamp=None,
@@ -1379,7 +1537,8 @@ class Topic_vehicle_global_velocity_setpoint(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1401,23 +1560,108 @@ class Topic_vehicle_global_velocity_setpoint(object):
 
 class Topic_vehicle_gps_position(object):
     """
-    None
+    GPS position in WGS84 coordinates.
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp_position :
+        Timestamp for position information.
+    lat :
+        Latitude in 1E-7 degrees.
+    lon :
+        Longitude in 1E-7 degrees.
+    alt :
+        Altitude in 1E-3 meters (millimeters) above MSL.
+    timestamp_variance :
+        None
+    s_variance_m_s :
+        speed accuracy estimate m/s.
+    c_variance_rad :
+        course accuracy estimate rad.
+    fix_type :
+        0-1: no fix, 2: 2D fix, 3: 3D fix. Some applications will not use the value of this field unless it is at least two, so always correctly fill in the fix.
+    eph :
+        GPS HDOP horizontal dilution of position in m.
+    epv :
+        GPS VDOP horizontal dilution of position in m.
+    noise_per_ms :
+        .
+    jamming_indicator :
+        .
+    timestamp_velocity :
+        Timestamp for velocity informations.
+    vel_m_s :
+        GPS ground speed (m/s).
+    vel_n_m_s :
+        GPS ground speed in m/s.
+    vel_e_m_s :
+        GPS ground speed in m/s.
+    vel_d_m_s :
+        GPS ground speed in m/s.
+    cog_rad :
+        Course over ground (NOT heading, but direction of movement) in rad, -PI..PI.
+    vel_ned_valid :
+        Flag to indicate if NED speed is valid.
+    timestamp_time :
+        Timestamp for time information.
+    time_gps_usec :
+        Timestamp (microseconds in GPS format), this is the timestamp which comes from the gps module.
+    satellites_used :
+        Number of satellites used.
     """
 
-    def __init__(self, timestamp=None):
-        self.timestamp = timestamp
+    def __init__(self, timestamp_position=None,
+            lat=None,
+            lon=None,
+            alt=None,
+            timestamp_variance=None,
+            s_variance_m_s=None,
+            c_variance_rad=None,
+            fix_type=None,
+            eph=None,
+            epv=None,
+            noise_per_ms=None,
+            jamming_indicator=None,
+            timestamp_velocity=None,
+            vel_m_s=None,
+            vel_n_m_s=None,
+            vel_e_m_s=None,
+            vel_d_m_s=None,
+            cog_rad=None,
+            vel_ned_valid=None,
+            timestamp_time=None,
+            time_gps_usec=None,
+            satellites_used=None):
+        self.timestamp_position = timestamp_position
+        self.lat = lat
+        self.lon = lon
+        self.alt = alt
+        self.timestamp_variance = timestamp_variance
+        self.s_variance_m_s = s_variance_m_s
+        self.c_variance_rad = c_variance_rad
+        self.fix_type = fix_type
+        self.eph = eph
+        self.epv = epv
+        self.noise_per_ms = noise_per_ms
+        self.jamming_indicator = jamming_indicator
+        self.timestamp_velocity = timestamp_velocity
+        self.vel_m_s = vel_m_s
+        self.vel_n_m_s = vel_n_m_s
+        self.vel_e_m_s = vel_e_m_s
+        self.vel_d_m_s = vel_d_m_s
+        self.cog_rad = cog_rad
+        self.vel_ned_valid = vel_ned_valid
+        self.timestamp_time = timestamp_time
+        self.time_gps_usec = time_gps_usec
+        self.satellites_used = satellites_used
 
     @property
     def _fields(self):
-        return ('timestamp')
+        return ('timestamp_position', 'lat', 'lon', 'alt', 'timestamp_variance', 's_variance_m_s', 'c_variance_rad', 'fix_type', 'eph', 'epv', 'noise_per_ms', 'jamming_indicator', 'timestamp_velocity', 'vel_m_s', 'vel_n_m_s', 'vel_e_m_s', 'vel_d_m_s', 'cog_rad', 'vel_ned_valid', 'timestamp_time', 'time_gps_usec', 'satellites_used')
 
     @property
     def _values(self):
-        return (self.timestamp)
+        return (self.timestamp_position, self.lat, self.lon, self.alt, self.timestamp_variance, self.s_variance_m_s, self.c_variance_rad, self.fix_type, self.eph, self.epv, self.noise_per_ms, self.jamming_indicator, self.timestamp_velocity, self.vel_m_s, self.vel_n_m_s, self.vel_e_m_s, self.vel_d_m_s, self.cog_rad, self.vel_ned_valid, self.timestamp_time, self.time_gps_usec, self.satellites_used)
 
     def __str__(self):
         return str(self._fields) + ' ' + str(self._values)
@@ -1431,7 +1675,8 @@ class Topic_vehicle_local_position(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1457,11 +1702,16 @@ class Topic_vehicle_local_position_setpoint(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        x : position in x direction, meters, NED.
-        y : position in y direction, meters, NED.
-        z : position in z direction, meters, NED.
-        yaw : heading in radians -PI..+PI.
+    timestamp :
+        Microseconds since system boot.
+    x :
+        position in x direction, meters, NED.
+    y :
+        position in y direction, meters, NED.
+    z :
+        position in z direction, meters, NED.
+    yaw :
+        heading in radians -PI..+PI.
     """
 
     def __init__(self, timestamp=None,
@@ -1495,11 +1745,16 @@ class Topic_vehicle_rates_setpoint(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        roll : Roll anglular speed (rad/s, Tait-Bryan, NED)
-        pitch : Pitch angular speed (rad/s, Tait-Bryan, NED)
-        yaw : Yaw angular speed (rad/s, Tait-Bryan, NED)
-        thrust : Thrust normalized to 0..1
+    timestamp :
+        Microseconds since system boot.
+    roll :
+        Roll anglular speed (rad/s, Tait-Bryan, NED)
+    pitch :
+        Pitch angular speed (rad/s, Tait-Bryan, NED)
+    yaw :
+        Yaw angular speed (rad/s, Tait-Bryan, NED)
+    thrust :
+        Thrust normalized to 0..1
     """
 
     def __init__(self, timestamp=None,
@@ -1533,7 +1788,8 @@ class Topic_vehicle_status(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1559,7 +1815,8 @@ class Topic_vehicle_vicon_position(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1585,7 +1842,8 @@ class Topic_vehicle_vicon_estimate(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
+    timestamp :
+        Microseconds since system boot.
     """
 
     def __init__(self, timestamp=None):
@@ -1611,11 +1869,16 @@ class Topic_wind_estimate(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        windspeed_north : Wind component in north/ X direction.
-        windspeed_east : Wind component in east/ Y direction.
-        covariance_north : Uncertainty in north/ X direction. Set to zero (no uncertainty) if not estimated.
-        covariance_east : Uncertainty in east/ Y direction. Set to zero (no uncertainty) if not estimated.
+    timestamp :
+        Microseconds since system boot.
+    windspeed_north :
+        Wind component in north/ X direction.
+    windspeed_east :
+        Wind component in east/ Y direction.
+    covariance_north :
+        Uncertainty in north/ X direction. Set to zero (no uncertainty) if not estimated.
+    covariance_east :
+        Uncertainty in east/ Y direction. Set to zero (no uncertainty) if not estimated.
     """
 
     def __init__(self, timestamp=None,
@@ -1649,22 +1912,38 @@ class Topic_sim_state(object):
 
     Parameters
     ----------
-        timestamp : Microseconds since system boot.
-        roll : Roll angle (rad, Tait-Bryan, NED)
-        pitch : Pitch angle (rad, Tait-Bryan, NED)
-        yaw : Yaw angle (rad, Tait-Bryan, NED)
-        rollspeed : Roll anglular speed (rad/s, Tait-Bryan, NED)
-        pitchspeed : Pitch angular speed (rad/s, Tait-Bryan, NED)
-        yawspeed : Yaw angular speed (rad/s, Tait-Bryan, NED)
-        lat : Latitude in degrees.
-        lon : Longitude in degrees.
-        alt : Altitude in meteres.
-        vx : Ground speed x(latitude) m/s.
-        vy : Ground speed y(longitude) m/s.
-        vz : Ground speed z(altitude) m.
-        xacc : X acceleration m/s^2.
-        yacc : X acceleration m/s^2.
-        zacc : X acceleration m/s^2.
+    timestamp :
+        Microseconds since system boot.
+    roll :
+        Roll angle (rad, Tait-Bryan, NED)
+    pitch :
+        Pitch angle (rad, Tait-Bryan, NED)
+    yaw :
+        Yaw angle (rad, Tait-Bryan, NED)
+    rollspeed :
+        Roll anglular speed (rad/s, Tait-Bryan, NED)
+    pitchspeed :
+        Pitch angular speed (rad/s, Tait-Bryan, NED)
+    yawspeed :
+        Yaw angular speed (rad/s, Tait-Bryan, NED)
+    lat :
+        Latitude in degrees.
+    lon :
+        Longitude in degrees.
+    alt :
+        Altitude in meteres.
+    vx :
+        Ground speed x(latitude) m/s.
+    vy :
+        Ground speed y(longitude) m/s.
+    vz :
+        Ground speed z(altitude) m.
+    xacc :
+        X acceleration m/s^2.
+    yacc :
+        X acceleration m/s^2.
+    zacc :
+        X acceleration m/s^2.
     """
 
     def __init__(self, timestamp=None,

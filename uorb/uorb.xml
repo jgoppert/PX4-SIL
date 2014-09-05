@@ -378,10 +378,31 @@
         <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
     </topic>
 
-    <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <topic name="vehicle_gps_position">
-        <description></description>
-        <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <description>GPS position in WGS84 coordinates.</description>
+        <field name="timestamp_position" type="uint64_t">Timestamp for position information.</field>
+        <field name="lat" typpe="int32_t">Latitude in 1E-7 degrees.</field>
+        <field name="lon" type="int32_t">Longitude in 1E-7 degrees.</field>
+        <field name="alt" type="int32_t">Altitude in 1E-3 meters (millimeters) above MSL.</field>
+        <field name="timestamp_variance" type="uint64_t">TODO.</field>
+        <field name="s_variance_m_s" type="float">speed accuracy estimate m/s.</field>
+        <field name="c_variance_rad" type="float">course accuracy estimate rad.</field>
+        <field name="fix_type" type="uint8_t">0-1: no fix, 2: 2D fix, 3: 3D fix. Some applications will not use the value of this field unless it is at least two, so always correctly fill in the fix.</field>
+        <field name="eph" type="float">GPS HDOP horizontal dilution of position in m.</field>
+        <field name="epv" type="float">GPS VDOP horizontal dilution of position in m.</field>
+        <field name="noise_per_ms" type="unsigned">TODO.</field>
+        <field name="jamming_indicator" type="unsigned">Indicated GPS is jammed.</field>
+        <field name="timestamp_velocity" type="uint64_t">Timestamp for velocity informations.</field>
+        <field name="vel_m_s" type="float">GPS ground speed (m/s).</field>
+        <field name="vel_n_m_s" type="float">GPS ground speed in m/s.</field>
+        <field name="vel_e_m_s" type="float">GPS ground speed in m/s.</field>
+        <field name="vel_d_m_s" type="float">GPS ground speed in m/s.</field>
+        <field name="cog_rad" type="float">Course over ground (NOT heading, but direction of movement) in rad, -PI..PI.</field>
+        <field name="vel_ned_valid" type="bool">Flag to indicate if NED speed is valid.</field>
+        <field name="timestamp_time" type="uint64_t">Timestamp for time information.</field>
+        <field name="time_gps_usec" type="uint64_t">Timestamp (microseconds in GPS format), this is the timestamp which comes from the gps module.</field>
+        <field name="satellites_used" type="uint8_t">Number of satellites used.</field> 
     </topic>
 
     <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
