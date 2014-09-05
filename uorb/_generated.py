@@ -2,7 +2,7 @@
 # automatically generated using uorb/generate.py
 # edit uorb/uorb.xml
 
-generation_timestamp = '2014-09-04 23:04:21'
+generation_timestamp = '2014-09-04 23:09:56'
 
 
 class Topic_actuator_armed(object):
@@ -772,7 +772,7 @@ class Topic_sensor_combined(object):
         baro_alt_meter : Altitude, already temp. comp.
         baro_temp_celcius : Temperature in degrees celsius.
         adc_voltage_v : ADC voltages of ADC Chan 10/11/12/13 or -1.
-        adc_mapping type : Channel indices of each of these values.
+        adc_mapping : Channel indices of each of these values.
         mcu_temp_celcius : Internal temperature measurement of MCU.
         baro_timestamp : Barometer timestamp.
         differential_pressure_pa : Airspeed sensor differential pressure.
@@ -780,7 +780,7 @@ class Topic_sensor_combined(object):
         differential_pressure_filtered_pa : Low pass filtered airspeed sensor differential pressure reading.
     """
 
-    def __init__(self, timestamp, gyro_raw, gyro_rad_s, accelerometer_raw, accelerometer_m_s2, accelerometer_mode, accelerometer_range_m_s2, accelerometer_timestamp, magnetometer_raw, magnetometer_ga, magnetometer_mode, magnetometer_range_ga, magnetometer_cuttoff_freq_hz, magnetometer_timestamp, gyro1_raw, gyro1_rad_s, gyro1_timestamp, accelerometer1_raw, accelerometer1_m_s2, accelerometer1_timestamp, magnetometer1_raw, magnetometer1_ga, magnetometer1_timestamp, gyro2_raw, gyro2_rad_s, gyro2_timestamp, accelerometer2_raw, accelerometer2_m_s2, accelerometer2_timestamp, magnetometer2_raw, magnetometer2_ga, magnetometer2_timestamp, baro_pres_mbar, baro_alt_meter, baro_temp_celcius, adc_voltage_v, adc_mapping type, mcu_temp_celcius, baro_timestamp, differential_pressure_pa, differential_pressure_timestamp, differential_pressure_filtered_pa):
+    def __init__(self, timestamp, gyro_raw, gyro_rad_s, accelerometer_raw, accelerometer_m_s2, accelerometer_mode, accelerometer_range_m_s2, accelerometer_timestamp, magnetometer_raw, magnetometer_ga, magnetometer_mode, magnetometer_range_ga, magnetometer_cuttoff_freq_hz, magnetometer_timestamp, gyro1_raw, gyro1_rad_s, gyro1_timestamp, accelerometer1_raw, accelerometer1_m_s2, accelerometer1_timestamp, magnetometer1_raw, magnetometer1_ga, magnetometer1_timestamp, gyro2_raw, gyro2_rad_s, gyro2_timestamp, accelerometer2_raw, accelerometer2_m_s2, accelerometer2_timestamp, magnetometer2_raw, magnetometer2_ga, magnetometer2_timestamp, baro_pres_mbar, baro_alt_meter, baro_temp_celcius, adc_voltage_v, adc_mapping, mcu_temp_celcius, baro_timestamp, differential_pressure_pa, differential_pressure_timestamp, differential_pressure_filtered_pa):
         self.timestamp = timestamp
         self.gyro_raw = gyro_raw
         self.gyro_rad_s = gyro_rad_s
@@ -817,7 +817,7 @@ class Topic_sensor_combined(object):
         self.baro_alt_meter = baro_alt_meter
         self.baro_temp_celcius = baro_temp_celcius
         self.adc_voltage_v = adc_voltage_v
-        self.adc_mapping type = adc_mapping type
+        self.adc_mapping = adc_mapping
         self.mcu_temp_celcius = mcu_temp_celcius
         self.baro_timestamp = baro_timestamp
         self.differential_pressure_pa = differential_pressure_pa
@@ -826,11 +826,11 @@ class Topic_sensor_combined(object):
 
     @property
     def _fields(self):
-        return ('timestamp', 'gyro_raw', 'gyro_rad_s', 'accelerometer_raw', 'accelerometer_m_s2', 'accelerometer_mode', 'accelerometer_range_m_s2', 'accelerometer_timestamp', 'magnetometer_raw', 'magnetometer_ga', 'magnetometer_mode', 'magnetometer_range_ga', 'magnetometer_cuttoff_freq_hz', 'magnetometer_timestamp', 'gyro1_raw', 'gyro1_rad_s', 'gyro1_timestamp', 'accelerometer1_raw', 'accelerometer1_m_s2', 'accelerometer1_timestamp', 'magnetometer1_raw', 'magnetometer1_ga', 'magnetometer1_timestamp', 'gyro2_raw', 'gyro2_rad_s', 'gyro2_timestamp', 'accelerometer2_raw', 'accelerometer2_m_s2', 'accelerometer2_timestamp', 'magnetometer2_raw', 'magnetometer2_ga', 'magnetometer2_timestamp', 'baro_pres_mbar', 'baro_alt_meter', 'baro_temp_celcius', 'adc_voltage_v', 'adc_mapping type', 'mcu_temp_celcius', 'baro_timestamp', 'differential_pressure_pa', 'differential_pressure_timestamp', 'differential_pressure_filtered_pa')
+        return ('timestamp', 'gyro_raw', 'gyro_rad_s', 'accelerometer_raw', 'accelerometer_m_s2', 'accelerometer_mode', 'accelerometer_range_m_s2', 'accelerometer_timestamp', 'magnetometer_raw', 'magnetometer_ga', 'magnetometer_mode', 'magnetometer_range_ga', 'magnetometer_cuttoff_freq_hz', 'magnetometer_timestamp', 'gyro1_raw', 'gyro1_rad_s', 'gyro1_timestamp', 'accelerometer1_raw', 'accelerometer1_m_s2', 'accelerometer1_timestamp', 'magnetometer1_raw', 'magnetometer1_ga', 'magnetometer1_timestamp', 'gyro2_raw', 'gyro2_rad_s', 'gyro2_timestamp', 'accelerometer2_raw', 'accelerometer2_m_s2', 'accelerometer2_timestamp', 'magnetometer2_raw', 'magnetometer2_ga', 'magnetometer2_timestamp', 'baro_pres_mbar', 'baro_alt_meter', 'baro_temp_celcius', 'adc_voltage_v', 'adc_mapping', 'mcu_temp_celcius', 'baro_timestamp', 'differential_pressure_pa', 'differential_pressure_timestamp', 'differential_pressure_filtered_pa')
 
     @property
     def _values(self):
-        return (self.timestamp, self.gyro_raw, self.gyro_rad_s, self.accelerometer_raw, self.accelerometer_m_s2, self.accelerometer_mode, self.accelerometer_range_m_s2, self.accelerometer_timestamp, self.magnetometer_raw, self.magnetometer_ga, self.magnetometer_mode, self.magnetometer_range_ga, self.magnetometer_cuttoff_freq_hz, self.magnetometer_timestamp, self.gyro1_raw, self.gyro1_rad_s, self.gyro1_timestamp, self.accelerometer1_raw, self.accelerometer1_m_s2, self.accelerometer1_timestamp, self.magnetometer1_raw, self.magnetometer1_ga, self.magnetometer1_timestamp, self.gyro2_raw, self.gyro2_rad_s, self.gyro2_timestamp, self.accelerometer2_raw, self.accelerometer2_m_s2, self.accelerometer2_timestamp, self.magnetometer2_raw, self.magnetometer2_ga, self.magnetometer2_timestamp, self.baro_pres_mbar, self.baro_alt_meter, self.baro_temp_celcius, self.adc_voltage_v, self.adc_mapping type, self.mcu_temp_celcius, self.baro_timestamp, self.differential_pressure_pa, self.differential_pressure_timestamp, self.differential_pressure_filtered_pa)
+        return (self.timestamp, self.gyro_raw, self.gyro_rad_s, self.accelerometer_raw, self.accelerometer_m_s2, self.accelerometer_mode, self.accelerometer_range_m_s2, self.accelerometer_timestamp, self.magnetometer_raw, self.magnetometer_ga, self.magnetometer_mode, self.magnetometer_range_ga, self.magnetometer_cuttoff_freq_hz, self.magnetometer_timestamp, self.gyro1_raw, self.gyro1_rad_s, self.gyro1_timestamp, self.accelerometer1_raw, self.accelerometer1_m_s2, self.accelerometer1_timestamp, self.magnetometer1_raw, self.magnetometer1_ga, self.magnetometer1_timestamp, self.gyro2_raw, self.gyro2_rad_s, self.gyro2_timestamp, self.accelerometer2_raw, self.accelerometer2_m_s2, self.accelerometer2_timestamp, self.magnetometer2_raw, self.magnetometer2_ga, self.magnetometer2_timestamp, self.baro_pres_mbar, self.baro_alt_meter, self.baro_temp_celcius, self.adc_voltage_v, self.adc_mapping, self.mcu_temp_celcius, self.baro_timestamp, self.differential_pressure_pa, self.differential_pressure_timestamp, self.differential_pressure_filtered_pa)
 
     def __str__(self):
         return str(self._fields) + ' ' + str(self._values)
