@@ -6,6 +6,9 @@ __all__ = ['Manager', 'Subscription', 'Publication']
 
 class Manager(object):
 
+    # TODO, should have manager initialize all topics to break the loop
+    # of subscriber/publisher initialization
+
     def __init__(self, copy_type='pointer'):
         """
         Parameters
