@@ -1,11 +1,7 @@
-{'A': "MutableDenseMatrix([[Integer(0), Integer(1)], [Mul(Symbol('g'), Pow(Symbol('l'), Integer(-1)), cos(Function('theta')(Symbol('t')))), Integer(0)]])",
- 'tau': "Function('tau')",
- 'B': "MutableDenseMatrix([[Integer(0)], [Mul(Pow(Symbol('l'), Integer(-2)), Pow(Symbol('m'), Integer(-1)))]])",
- 'g': "Symbol('g')",
- 'rhs': "MutableDenseMatrix([[Derivative(Function('theta')(Symbol('t')), Symbol('t'))], [Mul(Pow(Symbol('l'), Integer(-2)), Pow(Symbol('m'), Integer(-1)), Add(Mul(Symbol('g'), Symbol('l'), Symbol('m'), sin(Function('theta')(Symbol('t')))), Function('tau')(Symbol('t'))))]])",
- 'm': "Symbol('m')",
- 'l': "Symbol('l')",
- 'u_vect': "MutableDenseMatrix([[Function('tau')(Symbol('t'))]])",
- 't': "Symbol('t')",
- 'x_vect': "MutableDenseMatrix([[Function('theta')(Symbol('t'))], [Derivative(Function('theta')(Symbol('t')), Symbol('t'))]])",
- 'theta': "Function('theta')"}
+g = Symbol('g')
+t = Symbol('t')
+l = Symbol('l')
+m = Symbol('m')
+theta = Function('theta')
+tau = Function('tau')
+e = {'A': MutableDenseMatrix([[0, 1], [g*cos(theta(t))/l, 0]]), 'B': MutableDenseMatrix([[0], [1/(l**2*m)]]), 'g': g, 'l': l, 'm': m, 'rhs': MutableDenseMatrix([[Derivative(theta(t), t)], [(g*l*m*sin(theta(t)) + tau(t))/(l**2*m)]]), 't': t, 'tau': Function('tau'), 'theta': Function('theta'), 'u_vect': MutableDenseMatrix([[tau(t)]]), 'x_vect': MutableDenseMatrix([[theta(t)], [Derivative(theta(t), t)]])}
