@@ -4,4 +4,4 @@ l = Symbol('l')
 m = Symbol('m')
 theta = Function('theta')
 tau = Function('tau')
-e = {'A': MutableDenseMatrix([[0, 1], [g*cos(theta(t))/l, 0]]), 'B': MutableDenseMatrix([[0], [1/(l**2*m)]]), 'g': g, 'l': l, 'm': m, 'rhs': MutableDenseMatrix([[Derivative(theta(t), t)], [(g*l*m*sin(theta(t)) + tau(t))/(l**2*m)]]), 't': t, 'tau': Function('tau'), 'theta': Function('theta'), 'u_vect': MutableDenseMatrix([[tau(t)]]), 'x_vect': MutableDenseMatrix([[theta(t)], [Derivative(theta(t), t)]])}
+e = {'A': MutableDenseMatrix([[0, 1], [g*cos(theta(t))/l, 0]]), 'B': MutableDenseMatrix([[0], [1/(l**2*m)]]), 'accel_meas_vect': MutableDenseMatrix([[g*sin(theta(t)) - (g*l*m*sin(theta(t)) + tau(t))/(l*m)], [0], [-g*cos(theta(t)) + l*Derivative(theta(t), t)**2]]), 'g': g, 'l': l, 'm': m, 'rhs': MutableDenseMatrix([[Derivative(theta(t), t)], [(g*l*m*sin(theta(t)) + tau(t))/(l**2*m)]]), 't': t, 'tau': Function('tau'), 'theta': Function('theta'), 'u_vect': MutableDenseMatrix([[tau(t)]]), 'x_vect': MutableDenseMatrix([[theta(t)], [Derivative(theta(t), t)]])}
