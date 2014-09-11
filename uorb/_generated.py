@@ -2,7 +2,7 @@
 # automatically generated using uorb/generate.py
 # edit uorb/uorb.xml
 
-generation_timestamp = '2014-09-05 14:32:12'
+generation_timestamp = '2014-09-11 15:51:24'
 
 
 class Topic_actuator_armed(object):
@@ -1573,7 +1573,7 @@ class Topic_vehicle_gps_position(object):
     alt :
         Altitude in 1E-3 meters (millimeters) above MSL.
     timestamp_variance :
-        None
+        TODO.
     s_variance_m_s :
         speed accuracy estimate m/s.
     c_variance_rad :
@@ -1585,9 +1585,9 @@ class Topic_vehicle_gps_position(object):
     epv :
         GPS VDOP horizontal dilution of position in m.
     noise_per_ms :
-        .
+        TODO.
     jamming_indicator :
-        .
+        Indicated GPS is jammed.
     timestamp_velocity :
         Timestamp for velocity informations.
     vel_m_s :
