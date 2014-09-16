@@ -1,4 +1,5 @@
 import sympy
+import pprint
 
 
 def rhs_to_scipy_ode(rhs, t, x_vect, u_vect, constants, *args, **lambdify_kwargs):
@@ -61,7 +62,21 @@ def save_sympy_expr(expr, filename):
 def load_sympy_expr(filename):
     with open(filename, 'r') as load_file:
         load_string = load_file.read()
-    from sympy import *
+    exec('from sympy import *')
+    exec(load_string)
+    e = locals()['e']
+    return e
+
+
+def save_repr(d, filename, env_string=''):
+    with open(filename, 'wb') as save_file:
+        save_file.write(env_string)
+        save_file.write('e=' + pprint.saferepr(d))
+
+
+def load_repr(filename):
+    with open(filename, 'r') as load_file:
+        load_string = load_file.read()
     exec(load_string)
     e = locals()['e']
     return e
