@@ -1,8 +1,12 @@
 import sympy
+from numpy import f2py
 import pprint
+from sympy.utilities import codegen
+import StringIO
 
 
-def rhs_to_scipy_ode(rhs, t, x_vect, u_vect, constants, *args, **lambdify_kwargs):
+def rhs_to_scipy_ode(rhs, t, x_vect, u_vect,
+                     constants, *args, **lambdify_kwargs):
     """Convert rhs to lambda function and jacobian comaptible with scipy.
 
     Given a state space description of a dynamic system, create
@@ -48,9 +52,14 @@ def rhs_to_scipy_ode(rhs, t, x_vect, u_vect, constants, *args, **lambdify_kwargs
     u = sympy.DeferredVector('u')
     ss_subs = {x_vect[i]: x[i] for i in range(len(x_vect))}
     ss_subs.update({u_vect[i]: u[i] for i in range(len(u_vect))})
-    f = sympy.lambdify((t, x, u) + args, rhs.subs(ss_subs), **lambdify_kwargs)
+    if 'default_array' not in lambdify_kwargs.keys():
+        lambdify_kwargs['default_array'] = True
+    f = sympy.lambdify((t, x, u) + args, rhs.subs(ss_subs),
+                       **lambdify_kwargs)
     jac_vect = rhs.jacobian(x_vect)
-    jac = sympy.lambdify((t, x, u) + args, jac_vect.subs(ss_subs))
+    jac = sympy.lambdify(
+        (t, x, u) + args, jac_vect.subs(ss_subs),
+        **lambdify_kwargs)
     return (f, jac)
 
 
@@ -80,3 +89,17 @@ def load_repr(filename):
     exec(load_string)
     e = locals()['e']
     return e
+
+
+def gen_fortran_module(module, routines, project, header=True):
+    fgen = codegen.FCodeGen(project)
+    s = StringIO.StringIO()
+    fgen.dump_f95(routines, s, module, header=header)
+    src = s.getvalue()
+    s.close()
+    return src
+
+
+def compile_fortran_module(src, module):
+    if f2py.compile(src, 'pendulum') != 0:
+        raise RuntimeError('f2py compilation failed:\n' + src)
