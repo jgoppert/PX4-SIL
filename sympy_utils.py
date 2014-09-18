@@ -4,6 +4,10 @@ import pprint
 from sympy.utilities import codegen
 import StringIO
 
+# require newer sympy for codegen
+if not sympy.__version__.split('-')[0] >= '0.7.5':
+        raise RuntimeError('install newer sympy version')
+
 
 def rhs_to_scipy_ode(rhs, t, x_vect, u_vect,
                      constants, *args, **lambdify_kwargs):
