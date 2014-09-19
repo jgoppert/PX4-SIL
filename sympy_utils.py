@@ -95,15 +95,55 @@ def load_repr(filename):
     return e
 
 
-def gen_fortran_module(module, routines, project, header=True):
+def create_fortran_module_from_sympy_save(module, expr_file):
+    source = gen_fortran_module(
+        module=module,
+        **load_sympy_expr(expr_file))
+    compile_fortran_module(
+        filename=module+'.f90',
+        module=module,
+        source=source)
+    exec('import {:s}'.format(module))
+    return locals()[module]
+
+
+def compile_fortran_module(filename, module, source=None):
+    if source is None:
+        source = open(filename, 'r').read()
+    if f2py.compile(source=source, modulename=module,
+                    source_fn=filename):
+        raise RuntimeError('compile failed, see console')
+
+
+def gen_fortran_module(
+        module, t, x, u, f, g_list, const,
+        project='PX4-SIL', header=True):
+    x_ = sympy.MatrixSymbol('x', len(x), 1)
+    u_ = sympy.MatrixSymbol('u', len(u), 1)
+    ss_sub = {x[i]: x_[i, 0] for i in range(len(x))}
+    ss_sub.update({u[i]: u_[i, 0] for i in range(len(u))})
+    name_expr = [
+        ('f', f),
+        ('A', f.jacobian(x)),
+        ('B', f.jacobian(u))]
+    for g in g_list:
+        name = g[0]
+        expr = g[1]
+        name_expr.append((name, expr))
+        name_expr.append((name+'_H', expr.jacobian(x)))
+
+    routines = []
+    for name, expr in name_expr:
+        out = sympy.MatrixSymbol('out', expr.shape[0], expr.shape[1])
+        expr = expr.applyfunc(lambda e: e.simplify())
+        routines.append(codegen.Routine(
+            'compute_'+name,
+            sympy.Equality(out, expr.subs(ss_sub)),
+            (out, t, x_, u_) + const))
+
     fgen = codegen.FCodeGen(project)
     s = StringIO.StringIO()
     fgen.dump_f95(routines, s, module, header=header)
     src = s.getvalue()
     s.close()
     return src
-
-
-def compile_fortran_module(src, module):
-    if f2py.compile(src, 'pendulum') != 0:
-        raise RuntimeError('f2py compilation failed:\n' + src)

@@ -1,7 +1,7 @@
-g = Symbol('g')
-t = Symbol('t')
-l = Symbol('l')
 m = Symbol('m')
-tau = Function('tau')
+g = Symbol('g')
+l = Symbol('l')
+t = Symbol('t')
 theta = Function('theta')
-e = {'g': g, 'g_accel': ImmutableMatrix([[-tau(t)/(l*m)], [0], [-g*cos(theta(t)) + l*Derivative(theta(t), t)**2]]), 'g_gyro': ImmutableMatrix([[0], [Derivative(theta(t), t)], [0]]), 'l': l, 'm': m, 'rhs': MutableDenseMatrix([[Derivative(theta(t), t)], [(g*l*m*sin(theta(t)) + tau(t))/(l**2*m)]]), 't': t, 'tau': tau(t), 'theta': theta(t), 'u': (theta(t), Derivative(theta(t), t)), 'x': (theta(t), Derivative(theta(t), t))}
+tau = Function('tau')
+e = {'const': (m, g, l), 'f': MutableDenseMatrix([[Derivative(theta(t), t)], [(g*l*m*sin(theta(t)) + tau(t))/(l**2*m)]]), 'g_list': [('g_accel', ImmutableMatrix([[-tau(t)/(l*m)], [0], [-g*cos(theta(t)) + l*Derivative(theta(t), t)**2]])), ('g_gyro', ImmutableMatrix([[0], [Derivative(theta(t), t)], [0]]))], 't': t, 'u': (tau(t),), 'x': (theta(t), Derivative(theta(t), t))}
