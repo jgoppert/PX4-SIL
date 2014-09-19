@@ -3,6 +3,7 @@ from numpy import f2py
 import pprint
 from sympy.utilities import codegen
 import StringIO
+import re
 
 # require newer sympy for codegen
 if not sympy.__version__.split('-')[0] >= '0.7.5':
@@ -69,7 +70,8 @@ def rhs_to_scipy_ode(rhs, t, x_vect, u_vect,
 
 def save_sympy_expr(expr, filename):
     with open(filename, 'wb') as save_file:
-        save_file.write(sympy.python(expr))
+        s = re.sub("(?P<key>'[^']*':)", '\n\g<key>', sympy.python(expr))
+        save_file.write(s)
 
 
 def load_sympy_expr(filename):
@@ -116,7 +118,7 @@ def compile_fortran_module(filename, module, source=None):
 
 
 def gen_fortran_module(
-        module, t, x, u, f, g_list, const,
+        module, t, x, u, f, g_dict, const,
         project='PX4-SIL', header=True):
     x_ = sympy.MatrixSymbol('x', len(x), 1)
     u_ = sympy.MatrixSymbol('u', len(u), 1)
@@ -126,9 +128,9 @@ def gen_fortran_module(
         ('f', f),
         ('A', f.jacobian(x)),
         ('B', f.jacobian(u))]
-    for g in g_list:
-        name = g[0]
-        expr = g[1]
+    for key in g_dict.keys():
+        name = key
+        expr = g_dict[key]
         name_expr.append((name, expr))
         name_expr.append((name+'_H', expr.jacobian(x)))
 

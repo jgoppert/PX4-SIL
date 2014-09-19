@@ -1,7 +1,16 @@
 m = Symbol('m')
 g = Symbol('g')
 l = Symbol('l')
+Q = Symbol('Q')
+theta = Symbol('theta')
+tau = Symbol('tau')
 t = Symbol('t')
-theta = Function('theta')
-tau = Function('tau')
-e = {'const': (m, g, l), 'f': MutableDenseMatrix([[Derivative(theta(t), t)], [(g*l*m*sin(theta(t)) + tau(t))/(l**2*m)]]), 'g_list': [('g_accel', ImmutableMatrix([[-tau(t)/(l*m)], [0], [-g*cos(theta(t)) + l*Derivative(theta(t), t)**2]])), ('g_gyro', ImmutableMatrix([[0], [Derivative(theta(t), t)], [0]]))], 't': t, 'u': (tau(t),), 'x': (theta(t), Derivative(theta(t), t))}
+e = {
+'const': (m, g, l), 
+'f': MutableDenseMatrix([[Q], [(g*l*m*sin(theta) + tau)/(l**2*m)]]), 
+'g_dict': {
+'g_accel': ImmutableMatrix([[-tau/(l*m)], [0], [Q**2*l - g*cos(theta)]]), 
+'g_gyro': ImmutableMatrix([[0], [Q], [0]])}, 
+'t': t, 
+'u': (tau,), 
+'x': (theta, Q)}
