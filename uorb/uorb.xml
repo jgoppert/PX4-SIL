@@ -140,6 +140,11 @@
     <topic name="manual_control_setpoint">
         <description></description>
         <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
+        <field name="x" type="float">Stick position in x direction -1..1</field>
+        <field name="y" type="float">Stick position in y direction -1..1</field>
+        <field name="z" type="float">Throttle stick position, -1..1</field>
+        <field name="r" type="float">Yaw stick/twist positon, -1..1</field>
+        
     </topic>
 
     <!--TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
