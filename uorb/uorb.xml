@@ -40,6 +40,7 @@
         <description>Definition of airspeed topic.</description>
         <field name="timestamp" type="uint64_t">Microseconds since system boot.</field>
         <field name="indicated_airspeed_m_s" type="float">Indicated airspeed in meters per second, -1 if unknown.</field>
+        <field name="true_airspeed_m_s" type="float">True airspeed in meters per second, -1 if unknown.</field>
         <field name="air_temperature_celsius" type="float">Air temperature in degrees celsius, -1000 if unknown.</field>
     </topic>
 
